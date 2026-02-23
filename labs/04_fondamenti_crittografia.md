@@ -27,14 +27,14 @@ Il vostro capo vi chiede di dimostrare che sapete cifrare un file riservato e ve
 
 **Step 1 — Creare un file di test**
 
-**🐧 Ubuntu/Linux e 🍎 macOS**
+**Ubuntu/Linux e macOS**
 
 ```bash
 echo "Questo è un messaggio segreto" > messaggio.txt
 cat messaggio.txt
 ```
 
-**🪟 Windows (PowerShell)**
+**Windows (PowerShell)**
 
 ```powershell
 Set-Content -Path messaggio.txt -Value "Questo è un messaggio segreto"
@@ -45,19 +45,19 @@ Get-Content messaggio.txt
 
 **Step 2 — Calcolare l'hash SHA-256**
 
-**🐧 Ubuntu/Linux**
+**Ubuntu/Linux**
 
 ```bash
 sha256sum messaggio.txt
 ```
 
-**🍎 macOS**
+**macOS**
 
 ```bash
 shasum -a 256 messaggio.txt
 ```
 
-**🪟 Windows (PowerShell)**
+**Windows (PowerShell)**
 
 ```powershell
 Get-FileHash messaggio.txt -Algorithm SHA256
@@ -71,7 +71,7 @@ Get-FileHash messaggio.txt -Algorithm SHA256
 
 Aggiungete un singolo punto al messaggio e ricalcolate l'hash:
 
-**🐧 Ubuntu/Linux e 🍎 macOS**
+**Ubuntu/Linux e macOS**
 
 ```bash
 echo "Questo è un messaggio segreto." > messaggio.txt
@@ -79,7 +79,7 @@ sha256sum messaggio.txt        # Linux
 shasum -a 256 messaggio.txt    # macOS
 ```
 
-**🪟 Windows**
+**Windows**
 
 ```powershell
 Set-Content -Path messaggio.txt -Value "Questo è un messaggio segreto."
@@ -94,7 +94,7 @@ Get-FileHash messaggio.txt -Algorithm SHA256
 
 **Step 4 — Cifrare un file con AES-256**
 
-**🐧 Ubuntu/Linux e 🍎 macOS**
+**Ubuntu/Linux e macOS**
 
 ```bash
 echo "Piano strategico riservato" > segreto.txt
@@ -102,14 +102,14 @@ openssl enc -aes-256-cbc -salt -pbkdf2 -in segreto.txt -out segreto.enc
 # Vi chiederà una password — inventatene una e ricordatela!
 ```
 
-**🪟 Windows (con openssl via Git Bash o WSL)**
+**Windows (con openssl via Git Bash o WSL)**
 
 ```bash
 echo "Piano strategico riservato" > segreto.txt
 openssl enc -aes-256-cbc -salt -pbkdf2 -in segreto.txt -out segreto.enc
 ```
 
-**🪟 Windows (alternativa PowerShell senza openssl)**
+**Windows (alternativa PowerShell senza openssl)**
 
 > Se non avete openssl, potete usare 7-Zip per cifrare con AES:
 >
@@ -120,14 +120,14 @@ openssl enc -aes-256-cbc -salt -pbkdf2 -in segreto.txt -out segreto.enc
 
 **Step 5 — Verificare che il file cifrato non è leggibile**
 
-**🐧 Ubuntu/Linux e 🍎 macOS**
+**Ubuntu/Linux e macOS**
 
 ```bash
 cat segreto.enc
 # Output: caratteri illeggibili → il file è cifrato!
 ```
 
-**🪟 Windows**
+**Windows**
 
 ```powershell
 Get-Content segreto.enc
@@ -138,7 +138,7 @@ Get-Content segreto.enc
 
 **Step 6 — Decifrare il file**
 
-**🐧 Ubuntu/Linux e 🍎 macOS**
+**Ubuntu/Linux e macOS**
 
 ```bash
 openssl enc -d -aes-256-cbc -pbkdf2 -in segreto.enc -out rivelato.txt
@@ -147,7 +147,7 @@ cat rivelato.txt
 # Output: "Piano strategico riservato"
 ```
 
-**🪟 Windows (con openssl)**
+**Windows (con openssl)**
 
 ```bash
 openssl enc -d -aes-256-cbc -pbkdf2 -in segreto.enc -out rivelato.txt
@@ -160,21 +160,21 @@ cat rivelato.txt
 
 **Step 7 — Generare una coppia di chiavi RSA**
 
-**🐧 Ubuntu/Linux e 🍎 macOS**
+**Ubuntu/Linux e macOS**
 
 ```bash
 openssl genrsa -out chiave_privata.pem 2048
 openssl rsa -in chiave_privata.pem -pubout -out chiave_pubblica.pem
 ```
 
-**🪟 Windows (con openssl via Git Bash/WSL)**
+**Windows (con openssl via Git Bash/WSL)**
 
 ```bash
 openssl genrsa -out chiave_privata.pem 2048
 openssl rsa -in chiave_privata.pem -pubout -out chiave_pubblica.pem
 ```
 
-**🪟 Windows (alternativa PowerShell nativa)**
+**Windows (alternativa PowerShell nativa)**
 
 ```powershell
 # PowerShell può generare chiavi RSA tramite .NET:
@@ -202,7 +202,7 @@ Get-Content chiave_pubblica.pem    # Windows PowerShell
 
 **Step 9 — Cifrare con la chiave pubblica e decifrare con la privata**
 
-**🐧 Ubuntu/Linux e 🍎 macOS**
+**Ubuntu/Linux e macOS**
 
 ```bash
 echo "Messaggio per il destinatario" > msg.txt
@@ -214,7 +214,7 @@ cat msg_decifrato.txt
 # Output: "Messaggio per il destinatario"
 ```
 
-**🪟 Windows (con openssl)**
+**Windows (con openssl)**
 
 Stessi comandi — openssl è identico su tutti gli OS.
 
@@ -247,7 +247,7 @@ Stessi comandi — openssl è identico su tutti gli OS.
 
 ## Cleanup obbligatorio
 
-**🐧 Ubuntu/Linux e 🍎 macOS**
+**Ubuntu/Linux e macOS**
 
 ```bash
 rm -f messaggio.txt segreto.txt segreto.enc rivelato.txt
@@ -255,7 +255,7 @@ rm -f chiave_privata.pem chiave_pubblica.pem
 rm -f msg.txt msg.enc msg_decifrato.txt
 ```
 
-**🪟 Windows (PowerShell)**
+**Windows (PowerShell)**
 
 ```powershell
 Remove-Item messaggio.txt, segreto.txt, segreto.enc, rivelato.txt -ErrorAction SilentlyContinue
@@ -296,9 +296,9 @@ I due hash non hanno **nessuna somiglianza**. Questo è fondamentale per:
 
 | OS | Comando |
 |----|---------|
-| 🐧 Ubuntu/Linux | `sha256sum nomefile.txt` |
-| 🍎 macOS | `shasum -a 256 nomefile.txt` |
-| 🪟 Windows | `Get-FileHash nomefile.txt -Algorithm SHA256` |
+| Ubuntu/Linux | `sha256sum nomefile.txt` |
+| macOS | `shasum -a 256 nomefile.txt` |
+| Windows | `Get-FileHash nomefile.txt -Algorithm SHA256` |
 
 </details>
 
@@ -327,7 +327,7 @@ openssl enc -d -aes-256-cbc -pbkdf2 -in segreto.enc -out rivelato.txt
 
 Il flag `-d` indica la decifratura. La password deve essere **identica** a quella usata per cifrare.
 
-**🪟 Alternativa Windows senza openssl (7-Zip):**
+**Alternativa Windows senza openssl (7-Zip):**
 
 1. Tasto destro sul file → 7-Zip → Aggiungi all'archivio
 2. Formato: 7z, Crittografia: AES-256, inserire password

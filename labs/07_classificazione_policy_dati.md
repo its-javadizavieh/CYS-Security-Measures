@@ -50,7 +50,7 @@ Compilate la tabella assegnando il livello (1-4):
 
 ### Parte B — Creare cartelle e file di test (10 min)
 
-**🪟 Windows (PowerShell come Amministratore)**
+**Windows (PowerShell come Amministratore)**
 
 ```powershell
 New-Item -ItemType Directory -Path "C:\SecureTech\Pubblico" -Force
@@ -62,7 +62,7 @@ Set-Content "C:\SecureTech\Interno\procedura.txt" "Backup giornaliero ore 02:00"
 Set-Content "C:\SecureTech\Riservato\contratto.txt" "Importo: 150.000 EUR"
 ```
 
-**🐧 Ubuntu/Linux**
+**Ubuntu/Linux**
 
 ```bash
 mkdir -p ~/SecureTech/{pubblico,interno,riservato}
@@ -71,7 +71,7 @@ echo "Procedura interna" > ~/SecureTech/interno/procedura.txt
 echo "Contratto riservato" > ~/SecureTech/riservato/contratto.txt
 ```
 
-**🍎 macOS**
+**macOS**
 
 ```bash
 mkdir -p ~/SecureTech/{pubblico,interno,riservato}
@@ -84,7 +84,7 @@ echo "Contratto riservato" > ~/SecureTech/riservato/contratto.txt
 
 ### Parte C — Configurare i permessi (20 min)
 
-#### 🪟 Windows — Permessi NTFS
+#### Windows — Permessi NTFS
 
 **Step 3 — Modificare i permessi dalla GUI**
 
@@ -105,7 +105,7 @@ Get-Acl "C:\SecureTech\Riservato" | Format-List
 
 ---
 
-#### 🐧 Ubuntu/Linux — Permessi POSIX (chmod)
+#### Ubuntu/Linux — Permessi POSIX (chmod)
 
 **Step 3 — Vedere i permessi attuali**
 
@@ -132,7 +132,7 @@ sudo -u utente_test cat ~/SecureTech/riservato/contratto.txt
 
 ---
 
-#### 🍎 macOS — Permessi POSIX + ACL
+#### macOS — Permessi POSIX + ACL
 
 **Step 3 — Vedere i permessi attuali**
 
@@ -213,20 +213,20 @@ chmod 600 = rw-------   (proprietario: legge/scrive, altri: niente)
 
 ## Cleanup obbligatorio
 
-**🪟 Windows (PowerShell)**
+**Windows (PowerShell)**
 
 ```powershell
 Remove-Item -Recurse -Force "C:\SecureTech"
 ```
 
-**🐧 Ubuntu/Linux**
+**Ubuntu/Linux**
 
 ```bash
 rm -rf ~/SecureTech
 sudo deluser --remove-home utente_test 2>/dev/null
 ```
 
-**🍎 macOS**
+**macOS**
 
 ```bash
 rm -rf ~/SecureTech
@@ -261,7 +261,7 @@ rm -rf ~/SecureTech
 <details>
 <summary>Soluzione Parte C: verifica permessi per ogni OS</summary>
 
-**🪟 Windows**
+**Windows**
 
 ```powershell
 Get-Acl "C:\SecureTech\Riservato" | Format-List
@@ -276,7 +276,7 @@ Access : BUILTIN\Administrators Allow  FullControl
          # "Users" NON deve comparire
 ```
 
-**🐧 Ubuntu/Linux**
+**Ubuntu/Linux**
 
 ```bash
 ls -la ~/SecureTech/ | grep riservato
@@ -291,7 +291,7 @@ drwx------  2 studente studente  4096 feb 22 10:00 riservato
 - `drwx------` → solo il proprietario ha accesso (700)
 - Test: `sudo -u utente_test ls ~/SecureTech/riservato/` → "Permission denied"
 
-**🍎 macOS**
+**macOS**
 
 ```bash
 ls -la ~/SecureTech/ | grep riservato

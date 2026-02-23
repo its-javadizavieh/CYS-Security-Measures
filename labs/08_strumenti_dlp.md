@@ -73,7 +73,7 @@ Questo non è un CF: ABC123
 
 ### Parte B — Simulazione Blocco USB (15 min)
 
-**🪟 Windows — Group Policy (dimostrazione)**
+**Windows — Group Policy (dimostrazione)**
 
 ```powershell
 # Vedere i dispositivi USB collegati
@@ -87,7 +87,7 @@ Get-PnpDevice -Class USB | Select Status, FriendlyName
 
 > ⚠️ **NON attivare questa policy** sul PC del lab! È solo per capire come funziona.
 
-**🐧 Ubuntu/Linux — Regola udev (dimostrazione)**
+**Ubuntu/Linux — Regola udev (dimostrazione)**
 
 ```bash
 # Vedere i dispositivi USB collegati
@@ -103,7 +103,7 @@ EOF
 
 > ⚠️ **NON attivare questa regola** sulla VM del lab! È solo per capire come funziona.
 
-**🍎 macOS — Profilo di configurazione (dimostrazione)**
+**macOS — Profilo di configurazione (dimostrazione)**
 
 ```bash
 # Vedere i dispositivi USB collegati
@@ -124,7 +124,7 @@ system_profiler SPUSBDataType
 
 **Step 5 — Creare una cartella con documenti da proteggere**
 
-**🐧 Ubuntu/Linux e 🍎 macOS**
+**Ubuntu/Linux e macOS**
 
 ```bash
 mkdir -p ~/documenti_importanti
@@ -134,7 +134,7 @@ echo "Progetto finale" > ~/documenti_importanti/progetto.txt
 ls ~/documenti_importanti/
 ```
 
-**🪟 Windows (PowerShell)**
+**Windows (PowerShell)**
 
 ```powershell
 New-Item -ItemType Directory -Path "$HOME\documenti_importanti" -Force
@@ -148,7 +148,7 @@ Get-ChildItem "$HOME\documenti_importanti"
 
 **Step 6 — Creare il primo backup**
 
-**🐧 Ubuntu/Linux e 🍎 macOS (rsync)**
+**Ubuntu/Linux e macOS (rsync)**
 
 ```bash
 mkdir -p ~/backup
@@ -156,7 +156,7 @@ rsync -av ~/documenti_importanti/ ~/backup/documenti_importanti/
 # -a = archivio (mantiene permessi e date), -v = verbose
 ```
 
-**🪟 Windows (robocopy — integrato)**
+**Windows (robocopy — integrato)**
 
 ```powershell
 mkdir "$HOME\backup\documenti_importanti" -Force
@@ -168,7 +168,7 @@ robocopy "$HOME\documenti_importanti" "$HOME\backup\documenti_importanti" /MIR /
 
 **Step 7 — Verificare il backup**
 
-**🐧 Ubuntu/Linux e 🍎 macOS**
+**Ubuntu/Linux e macOS**
 
 ```bash
 ls ~/backup/documenti_importanti/
@@ -176,7 +176,7 @@ diff ~/documenti_importanti/ ~/backup/documenti_importanti/
 # Nessun output di diff → i file sono identici ✓
 ```
 
-**🪟 Windows**
+**Windows**
 
 ```powershell
 Get-ChildItem "$HOME\backup\documenti_importanti"
@@ -189,7 +189,7 @@ Compare-Object (Get-Content "$HOME\documenti_importanti\tesi_cap1.txt") (Get-Con
 
 **Step 8 — Backup incrementale (solo i file modificati)**
 
-**🐧 Ubuntu/Linux e 🍎 macOS**
+**Ubuntu/Linux e macOS**
 
 ```bash
 echo "Aggiunte nuove al capitolo 1" >> ~/documenti_importanti/tesi_cap1.txt
@@ -197,7 +197,7 @@ rsync -av ~/documenti_importanti/ ~/backup/documenti_importanti/
 # rsync copia SOLO i file modificati → veloce!
 ```
 
-**🪟 Windows**
+**Windows**
 
 ```powershell
 Add-Content "$HOME\documenti_importanti\tesi_cap1.txt" "Aggiunte nuove al capitolo 1"
@@ -209,7 +209,7 @@ robocopy "$HOME\documenti_importanti" "$HOME\backup\documenti_importanti" /MIR /
 
 **Step 9 — Simulare un disastro e ripristinare**
 
-**🐧 Ubuntu/Linux e 🍎 macOS**
+**Ubuntu/Linux e macOS**
 
 ```bash
 # "Disastro": cancellare un file importante
@@ -223,7 +223,7 @@ ls ~/documenti_importanti/
 # progetto.txt è tornato! ✓
 ```
 
-**🪟 Windows**
+**Windows**
 
 ```powershell
 # "Disastro": cancellare un file
@@ -266,13 +266,13 @@ Get-ChildItem "$HOME\documenti_importanti"
 
 ## Cleanup obbligatorio
 
-**🐧 Ubuntu/Linux e 🍎 macOS**
+**Ubuntu/Linux e macOS**
 
 ```bash
 rm -rf ~/documenti_importanti ~/backup
 ```
 
-**🪟 Windows**
+**Windows**
 
 ```powershell
 Remove-Item -Recurse -Force "$HOME\documenti_importanti", "$HOME\backup"
@@ -322,7 +322,7 @@ Altro cellulare: 347-9876543
 <details>
 <summary>Soluzione Step 6-9: comandi backup completi per ogni OS</summary>
 
-**🐧 Ubuntu/Linux e 🍎 macOS — rsync**
+**Ubuntu/Linux e macOS — rsync**
 
 ```bash
 # Primo backup
@@ -342,7 +342,7 @@ Opzioni utili di rsync:
 - `--delete` = rimuove dal backup i file cancellati nella sorgente
 - `--dry-run` = simula senza copiare (utile per verificare)
 
-**🪟 Windows — robocopy**
+**Windows — robocopy**
 
 ```powershell
 # Primo backup
@@ -369,9 +369,9 @@ Opzioni utili di robocopy:
 
 | OS | Strumento | Chi lo gestisce | Come funziona |
 |----|-----------|----------------|---------------|
-| 🪟 Windows | Group Policy (gpedit.msc) o MDM (Intune) | Amministratore IT | Policy centralizzata che disabilita classi di dispositivi removibili |
-| 🐧 Ubuntu/Linux | Regole udev | Amministratore di sistema | Regola in `/etc/udev/rules.d/` che intercetta l'aggiunta di dispositivi USB storage |
-| 🍎 macOS | Profili di configurazione MDM (Jamf, Mosyle) | Amministratore IT | Profilo `.mobileconfig` distribuito centralmente che disabilita media rimovibili |
+| Windows | Group Policy (gpedit.msc) o MDM (Intune) | Amministratore IT | Policy centralizzata che disabilita classi di dispositivi removibili |
+| Ubuntu/Linux | Regole udev | Amministratore di sistema | Regola in `/etc/udev/rules.d/` che intercetta l'aggiunta di dispositivi USB storage |
+| macOS | Profili di configurazione MDM (Jamf, Mosyle) | Amministratore IT | Profilo `.mobileconfig` distribuito centralmente che disabilita media rimovibili |
 
 **Perché bloccare le USB?**
 

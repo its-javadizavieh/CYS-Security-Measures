@@ -101,9 +101,9 @@ La scuola ha deciso che tutti gli account devono avere il 2FA attivato. Dovete c
 
 | OS | Metodo di verifica |
 |----|-------------------|
-| 🪟 Windows | Windows Hello (PIN, impronta, riconoscimento facciale) |
-| 🐧 Ubuntu/Linux | PIN del browser o chiave hardware se disponibile |
-| 🍎 macOS | Touch ID o password del sistema |
+| Windows | Windows Hello (PIN, impronta, riconoscimento facciale) |
+| Ubuntu/Linux | PIN del browser o chiave hardware se disponibile |
+| macOS | Touch ID o password del sistema |
 
 1. Dopo la registrazione → cliccare **"Authenticate"**
 2. Login riuscito senza password! ✓

@@ -23,21 +23,21 @@ Avete ricevuto un nuovo PC da configurare in modo sicuro prima di consegnarlo ad
 
 ### Step 1 — Verificare l'account (5 min)
 
-**🪟 Windows**
+**Windows**
 
 ```powershell
 whoami
 # Controllare di NON essere "Administrator"
 ```
 
-**🐧 Ubuntu/Linux**
+**Ubuntu/Linux**
 
 ```bash
 whoami
 # Non deve essere "root"
 ```
 
-**🍎 macOS**
+**macOS**
 
 ```bash
 whoami
@@ -50,19 +50,19 @@ whoami
 
 ### Step 2 — Creare un utente standard di test (5 min)
 
-**🪟 Windows (cmd come Amministratore)**
+**Windows (cmd come Amministratore)**
 
 ```cmd
 net user studente_test Password1! /add
 ```
 
-**🐧 Ubuntu/Linux**
+**Ubuntu/Linux**
 
 ```bash
 sudo adduser --disabled-password --gecos "" studente_test
 ```
 
-**🍎 macOS**
+**macOS**
 
 ```bash
 sudo dscl . -create /Users/studente_test
@@ -81,7 +81,7 @@ sudo chown studente_test:staff /Users/studente_test
 
 ### Step 3 — Attivare il firewall (10 min)
 
-**🪟 Windows**
+**Windows**
 
 1. Impostazioni → Privacy e sicurezza → Sicurezza di Windows → Firewall
 2. Verificare che sia **Attivo** su tutti i profili: Dominio, Privato, Pubblico
@@ -93,7 +93,7 @@ Get-NetFirewallProfile | Select Name, Enabled
 # Tutti devono mostrare "True"
 ```
 
-**🐧 Ubuntu/Linux**
+**Ubuntu/Linux**
 
 ```bash
 sudo ufw default deny incoming
@@ -103,7 +103,7 @@ sudo ufw enable
 sudo ufw status verbose
 ```
 
-**🍎 macOS**
+**macOS**
 
 1. Impostazioni di Sistema → Rete → Firewall → **Attiva**
 2. Cliccare "Opzioni…" → attivare "Blocca tutte le connessioni in entrata" (opzionale, per massima sicurezza)
@@ -120,17 +120,17 @@ sudo /usr/libexec/ApplicationFirewall/socketfilterfw --getglobalstate
 
 ### Step 4 — Verificare/installare gli aggiornamenti (10 min)
 
-**🪟 Windows**
+**Windows**
 
 - Impostazioni → Windows Update → Controlla aggiornamenti → Installare eventuali aggiornamenti
 
-**🐧 Ubuntu/Linux**
+**Ubuntu/Linux**
 
 ```bash
 sudo apt update && sudo apt upgrade -y
 ```
 
-**🍎 macOS**
+**macOS**
 
 ```bash
 softwareupdate --list
@@ -144,12 +144,12 @@ Oppure: Impostazioni di Sistema → Generali → Aggiornamento Software
 
 ### Step 5 — Antivirus / protezione (10 min)
 
-**🪟 Windows**
+**Windows**
 
 - Impostazioni → Sicurezza di Windows → Protezione da virus e minacce
 - Verificare che la protezione in tempo reale sia **Attiva**
 
-**🐧 Ubuntu/Linux — Installare fail2ban**
+**Ubuntu/Linux — Installare fail2ban**
 
 ```bash
 sudo apt install fail2ban -y
@@ -160,7 +160,7 @@ sudo fail2ban-client status
 
 > Linux non ha un antivirus tradizionale integrato, ma fail2ban protegge da attacchi brute-force via SSH.
 
-**🍎 macOS — Verificare Gatekeeper e XProtect**
+**macOS — Verificare Gatekeeper e XProtect**
 
 ```bash
 # Gatekeeper (blocca app non firmate)
@@ -213,20 +213,20 @@ Compilate questa checklist per il vostro sistema operativo:
 
 ## Cleanup obbligatorio
 
-**🪟 Windows**
+**Windows**
 
 ```cmd
 net user studente_test /delete
 ```
 
-**🐧 Ubuntu/Linux**
+**Ubuntu/Linux**
 
 ```bash
 sudo deluser --remove-home studente_test 2>/dev/null
 # Le modifiche UFW e fail2ban migliorano la sicurezza: possono restare
 ```
 
-**🍎 macOS**
+**macOS**
 
 ```bash
 sudo dscl . -delete /Users/studente_test
@@ -248,7 +248,7 @@ sudo rm -rf /Users/studente_test
 <details>
 <summary>Soluzione Step 3: comandi firewall per ogni OS</summary>
 
-**🪟 Windows (PowerShell Amministratore)**
+**Windows (PowerShell Amministratore)**
 
 ```powershell
 # Verificare stato di tutti i profili
@@ -262,7 +262,7 @@ Get-NetFirewallProfile | Select Name, Enabled
 # Output: tutti "True"
 ```
 
-**🐧 Ubuntu/Linux**
+**Ubuntu/Linux**
 
 ```bash
 sudo ufw default deny incoming
@@ -276,7 +276,7 @@ sudo ufw status verbose
 # 22/tcp ALLOW IN Anywhere
 ```
 
-**🍎 macOS**
+**macOS**
 
 ```bash
 # Attivare il firewall
@@ -291,13 +291,13 @@ sudo /usr/libexec/ApplicationFirewall/socketfilterfw --getglobalstate
 <details>
 <summary>Soluzione Step 5: verifica antivirus/protezione</summary>
 
-**🪟 Windows**
+**Windows**
 
 - Percorso: Impostazioni → Sicurezza di Windows → Protezione da virus e minacce
 - "Protezione in tempo reale" deve essere **Attiva** (interruttore verde)
 - Se disattivata: cliccare l'interruttore per riattivarla
 
-**🐧 Ubuntu/Linux**
+**Ubuntu/Linux**
 
 ```bash
 sudo systemctl status fail2ban
@@ -310,7 +310,7 @@ sudo fail2ban-client status
 # Jail list: sshd
 ```
 
-**🍎 macOS**
+**macOS**
 
 ```bash
 # Gatekeeper

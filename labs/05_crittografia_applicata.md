@@ -28,7 +28,7 @@ L'azienda richiede che tutti i laptop abbiano il disco cifrato e che i documenti
 
 Scegliete la sezione del vostro OS.
 
-#### 🪟 Windows — BitLocker
+#### Windows — BitLocker
 
 **Step 1 — Verificare se BitLocker è disponibile**
 
@@ -59,7 +59,7 @@ manage-bde -status C:
 
 ---
 
-#### 🐧 Ubuntu/Linux — LUKS (volume virtuale)
+#### Ubuntu/Linux — LUKS (volume virtuale)
 
 **Step 1 — Creare un file che simula un disco**
 
@@ -95,7 +95,7 @@ sudo strings ~/disco_test.img | grep "segreti"
 
 ---
 
-#### 🍎 macOS — FileVault
+#### macOS — FileVault
 
 **Step 1 — Verificare lo stato di FileVault**
 
@@ -135,16 +135,16 @@ I comandi GPG sono **identici su tutti gli OS** dopo l'installazione.
 
 **Step 4 — Installare GPG (se necessario)**
 
-**🐧 Ubuntu/Linux**: preinstallato (`gpg --version`)
+**Ubuntu/Linux**: preinstallato (`gpg --version`)
 
-**🍎 macOS**:
+**macOS**:
 
 ```bash
 brew install gnupg
 gpg --version
 ```
 
-**🪟 Windows**: scaricare e installare [Gpg4win](https://gpg4win.org/), oppure usare Git Bash (include GPG).
+**Windows**: scaricare e installare [Gpg4win](https://gpg4win.org/), oppure usare Git Bash (include GPG).
 
 ```cmd
 gpg --version
@@ -242,7 +242,7 @@ gpg --verify documento.txt.sig documento.txt
 
 ## Cleanup obbligatorio
 
-**🐧 Ubuntu/Linux (LUKS)**
+**Ubuntu/Linux (LUKS)**
 
 ```bash
 sudo cryptsetup luksClose vault_test 2>/dev/null
@@ -259,7 +259,7 @@ rm -f documento.txt documento.txt.gpg documento.txt.sig documento_decifrato.txt
 # gpg --delete-secret-and-public-key "email_di_test@example.com"
 ```
 
-**🪟 Windows (PowerShell)**
+**Windows (PowerShell)**
 
 ```powershell
 Remove-Item documento.txt, documento.txt.gpg, documento.txt.sig, documento_decifrato.txt -ErrorAction SilentlyContinue
@@ -281,7 +281,7 @@ Remove-Item documento.txt, documento.txt.gpg, documento.txt.sig, documento_decif
 <details>
 <summary>Soluzione Parte A: verifica cifratura disco per ogni OS</summary>
 
-**🪟 Windows — BitLocker**
+**Windows — BitLocker**
 
 ```powershell
 manage-bde -status C:
@@ -298,7 +298,7 @@ Volume C: []
     Key Protectors:       TPM, Recovery Password
 ```
 
-**🐧 Ubuntu/Linux — LUKS**
+**Ubuntu/Linux — LUKS**
 
 ```bash
 # Dopo aver montato il volume:
@@ -323,7 +323,7 @@ sudo strings ~/disco_test.img | grep "segreti"
 # Nessun risultato = cifratura funzionante ✓
 ```
 
-**🍎 macOS — FileVault**
+**macOS — FileVault**
 
 ```bash
 sudo fdesetup status

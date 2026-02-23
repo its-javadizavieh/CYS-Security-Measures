@@ -84,7 +84,7 @@ Analizzate questi scenari e decidete se sono phishing o legittimi:
 
 ### Step 5 — Aggiornamenti automatici (20 min)
 
-**🪟 Windows**
+**Windows**
 
 1. Impostazioni → Windows Update → Opzioni avanzate
 2. Verificare che "Ricevi aggiornamenti per altri prodotti Microsoft" sia **attivo**
@@ -100,7 +100,7 @@ Install-Module PSWindowsUpdate -Force
 Get-WindowsUpdate
 ```
 
-**🐧 Ubuntu/Linux**
+**Ubuntu/Linux**
 
 ```bash
 # Installare e configurare aggiornamenti automatici
@@ -113,7 +113,7 @@ cat /etc/apt/apt.conf.d/20auto-upgrades
 # Deve mostrare: APT::Periodic::Unattended-Upgrade "1";
 ```
 
-**🍎 macOS**
+**macOS**
 
 1. Impostazioni di Sistema → Generali → Aggiornamento Software
 2. Cliccare "Automatico" → attivare:
@@ -201,14 +201,14 @@ sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticallyI
 <details>
 <summary>Soluzione Step 5: verifica aggiornamenti automatici per ogni OS</summary>
 
-**🪟 Windows**
+**Windows**
 
 - Percorso: Impostazioni → Windows Update → Opzioni avanzate
 - "Ricevi aggiornamenti per altri prodotti Microsoft" → **Attivo**
 - "Scarica aggiornamenti con connessioni a consumo" → **Attivo** (opzionale)
 - Verifica: tornare su Windows Update → deve dire "Aggiornato" o mostrare aggiornamenti in corso
 
-**🐧 Ubuntu/Linux**
+**Ubuntu/Linux**
 
 ```bash
 cat /etc/apt/apt.conf.d/20auto-upgrades
@@ -223,7 +223,7 @@ Se il file non esiste o i valori sono "0", riconfigurare:
 sudo dpkg-reconfigure unattended-upgrades
 ```
 
-**🍎 macOS**
+**macOS**
 
 ```bash
 # Verificare tutti i parametri

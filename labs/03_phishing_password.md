@@ -87,13 +87,13 @@ Poi create la vostra **passphrase** sicura:
 
 #### Opzione B — KeePassXC (offline)
 
-**🪟 Windows**
+**Windows**
 
 - Scaricare da <https://keepassxc.org/download/#windows>
 - Installare con il wizard (Next → Next → Install)
 - Aprire → Database → Nuovo database → impostare master password
 
-**🐧 Ubuntu/Linux**
+**Ubuntu/Linux**
 
 ```bash
 sudo apt install keepassxc -y
@@ -101,7 +101,7 @@ sudo apt install keepassxc -y
 
 - Aprire KeePassXC → Database → Nuovo database → impostare master password
 
-**🍎 macOS**
+**macOS**
 
 ```bash
 # Con Homebrew:
@@ -214,7 +214,7 @@ Oppure scaricare da <https://keepassxc.org/download/#mac>
 <details>
 <summary>Soluzione Step 5: installazione KeePassXC — verifica per ogni OS</summary>
 
-**🪟 Windows**
+**Windows**
 
 1. Scaricare l'installer `.msi` da `keepassxc.org/download`
 2. Eseguire il file → Next → Next → Install → Finish
@@ -222,7 +222,7 @@ Oppure scaricare da <https://keepassxc.org/download/#mac>
 4. Database → Nuovo database → scegliere nome file (es. `passwords.kdbx`) → impostare master password
 5. Verifica: l'interfaccia si apre e mostra un database vuoto pronto per aggiungere password
 
-**🐧 Ubuntu/Linux**
+**Ubuntu/Linux**
 
 ```bash
 sudo apt install keepassxc -y
@@ -232,7 +232,7 @@ keepassxc --version
 
 Aprire da terminale con `keepassxc &` oppure dal menu delle applicazioni.
 
-**🍎 macOS**
+**macOS**
 
 ```bash
 brew install --cask keepassxc

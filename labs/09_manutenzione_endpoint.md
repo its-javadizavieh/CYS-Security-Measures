@@ -25,7 +25,7 @@ Un vecchio PC della scuola deve essere dismesso. Dovete prima fare un backup dei
 
 **Step 1 — Creare dei file da proteggere**
 
-**🐧 Ubuntu/Linux e 🍎 macOS**
+**Ubuntu/Linux e macOS**
 
 ```bash
 mkdir -p ~/dati_scuola
@@ -35,7 +35,7 @@ echo "Programmazione annuale" > ~/dati_scuola/programmazione.txt
 ls ~/dati_scuola/
 ```
 
-**🪟 Windows (PowerShell)**
+**Windows (PowerShell)**
 
 ```powershell
 New-Item -ItemType Directory -Path "$HOME\dati_scuola" -Force
@@ -49,7 +49,7 @@ Get-ChildItem "$HOME\dati_scuola"
 
 **Step 2 — Fare il backup**
 
-**🐧 Ubuntu/Linux e 🍎 macOS**
+**Ubuntu/Linux e macOS**
 
 ```bash
 mkdir -p ~/backup_scuola
@@ -57,7 +57,7 @@ rsync -av ~/dati_scuola/ ~/backup_scuola/
 ls ~/backup_scuola/
 ```
 
-**🪟 Windows**
+**Windows**
 
 ```powershell
 mkdir "$HOME\backup_scuola" -Force
@@ -69,14 +69,14 @@ Get-ChildItem "$HOME\backup_scuola"
 
 **Step 3 — Verificare il backup**
 
-**🐧 Ubuntu/Linux e 🍎 macOS**
+**Ubuntu/Linux e macOS**
 
 ```bash
 diff -r ~/dati_scuola/ ~/backup_scuola/
 # Nessun output → le cartelle sono identiche ✓
 ```
 
-**🪟 Windows**
+**Windows**
 
 ```powershell
 $original = Get-ChildItem "$HOME\dati_scuola" | ForEach-Object { $_.Name }
@@ -89,7 +89,7 @@ Compare-Object $original $backup
 
 **Step 4 — Simulare un problema e ripristinare**
 
-**🐧 Ubuntu/Linux e 🍎 macOS**
+**Ubuntu/Linux e macOS**
 
 ```bash
 # "Disastro": cancellare i file
@@ -103,7 +103,7 @@ cat ~/dati_scuola/registro.txt
 # Tutto ripristinato! ✓
 ```
 
-**🪟 Windows**
+**Windows**
 
 ```powershell
 # "Disastro": cancellare i file
@@ -129,7 +129,7 @@ Get-Content "$HOME\dati_scuola\registro.txt"
 
 **Step 6 — Cancellazione sicura**
 
-**🐧 Ubuntu/Linux — shred**
+**Ubuntu/Linux — shred**
 
 ```bash
 # Creare un file segreto
@@ -149,7 +149,7 @@ cat ~/file_segreto.txt
 rm ~/file_segreto.txt
 ```
 
-**🍎 macOS — rm -P (o gshred)**
+**macOS — rm -P (o gshred)**
 
 ```bash
 # Creare un file segreto
@@ -169,7 +169,7 @@ rm ~/file_segreto.txt
 
 > **Nota su SSD e macOS:** i Mac moderni con SSD usano TRIM e hanno il T2/M1/M2 chip con cifratura hardware. Per la dismissione completa, il metodo migliore è: FileVault (già visto nel Lab 05) + "Inizializza tutti i contenuti e le impostazioni" da Impostazioni di Sistema.
 
-**🪟 Windows — cipher /w (o SDelete)**
+**Windows — cipher /w (o SDelete)**
 
 ```powershell
 # Creare un file segreto
@@ -199,7 +199,7 @@ Per cancellazione sicura di file specifici, scaricare **SDelete** (Microsoft Sys
 
 **Step 7 — Cancellazione sicura di una cartella intera**
 
-**🐧 Ubuntu/Linux**
+**Ubuntu/Linux**
 
 ```bash
 mkdir ~/cartella_segreta
@@ -210,7 +210,7 @@ find ~/cartella_segreta -type f -exec shred -vfz -n 3 {} \;
 rm -rf ~/cartella_segreta
 ```
 
-**🍎 macOS**
+**macOS**
 
 ```bash
 mkdir ~/cartella_segreta
@@ -221,7 +221,7 @@ find ~/cartella_segreta -type f -exec gshred -vfz -n 3 {} \;
 rm -rf ~/cartella_segreta
 ```
 
-**🪟 Windows**
+**Windows**
 
 ```powershell
 New-Item -ItemType Directory -Path "$HOME\cartella_segreta" -Force
@@ -316,7 +316,7 @@ Firma responsabile: ________
 
 ## Cleanup obbligatorio
 
-**🐧 Ubuntu/Linux e 🍎 macOS**
+**Ubuntu/Linux e macOS**
 
 ```bash
 rm -rf ~/dati_scuola ~/backup_scuola
@@ -324,7 +324,7 @@ rm -f ~/file_segreto.txt
 rm -rf ~/cartella_segreta
 ```
 
-**🪟 Windows**
+**Windows**
 
 ```powershell
 Remove-Item -Recurse -Force "$HOME\dati_scuola", "$HOME\backup_scuola" -ErrorAction SilentlyContinue
@@ -351,11 +351,11 @@ Remove-Item -Recurse -Force "$HOME\cartella_segreta" -ErrorAction SilentlyContin
 
 | OS | Strumento | Comando | Tipo |
 |----|-----------|---------|------|
-| 🐧 Ubuntu/Linux | `shred` | `shred -vfz -n 3 file.txt` | File singolo; sovrascrive con dati random + zeri |
-| 🍎 macOS | `gshred` (via coreutils) | `gshred -vfz -n 3 file.txt` | Identico a shred di Linux |
-| 🍎 macOS (alternativa) | Inizializza Mac | Impostazioni → Generali → Trasferisci o inizializza | Wipe completo del dispositivo |
-| 🪟 Windows | `cipher /w` | `cipher /w:C:\` | Sovrascrive spazio libero (non file specifici) |
-| 🪟 Windows | `SDelete` (Sysinternals) | `sdelete -p 3 file.txt` | File singolo |
+| Ubuntu/Linux | `shred` | `shred -vfz -n 3 file.txt` | File singolo; sovrascrive con dati random + zeri |
+| macOS | `gshred` (via coreutils) | `gshred -vfz -n 3 file.txt` | Identico a shred di Linux |
+| macOS (alternativa) | Inizializza Mac | Impostazioni → Generali → Trasferisci o inizializza | Wipe completo del dispositivo |
+| Windows | `cipher /w` | `cipher /w:C:\` | Sovrascrive spazio libero (non file specifici) |
+| Windows | `SDelete` (Sysinternals) | `sdelete -p 3 file.txt` | File singolo |
 | Tutti | DBAN (Darik's Boot and Nuke) | Boot da USB → wipe intero disco | Dismissione completa |
 
 **Nota importante per SSD:**
@@ -370,7 +370,7 @@ Gli SSD gestiscono la scrittura in modo diverso dagli HDD (wear leveling, TRIM).
 <details>
 <summary>Soluzione Step 4: verifica ripristino completa</summary>
 
-**🐧 Ubuntu/Linux e 🍎 macOS**
+**Ubuntu/Linux e macOS**
 
 ```bash
 # Dopo il ripristino, verificare:
@@ -386,7 +386,7 @@ cat ~/dati_scuola/registro.txt
 # "Registro presenze - classe 3A"
 ```
 
-**🪟 Windows**
+**Windows**
 
 ```powershell
 # Dopo il ripristino, verificare:
