@@ -1,6 +1,6 @@
-# CYS — Misure sicurezza end user
+# CYS - Misure sicurezza end user
 
-Materiali didattici per il corso **"Misure sicurezza end user"** — ITS ICT Piemonte, Tecnico Superiore System Cybersecurity B.F. 2025/2027.
+Materiali didattici per il corso **"Misure sicurezza end user"** - ITS ICT Piemonte, Tecnico Superiore System Cybersecurity B.F. 2025/2027.
 
 ## 📚 About This Repository
 
@@ -40,7 +40,7 @@ Hands-on laboratory exercises (Italian) covering:
 ## 🎓 Course Information
 
 - **Institution**: ITS ICT Piemonte
-- **Course**: CYS — Misure sicurezza end user
+- **Course**: CYS - Misure sicurezza end user
 - **Programme**: Tecnico Superiore System Cybersecurity B.F. 2025/2027
 - **Duration**: 40h (10 lectures × 4h)
 - **Language**: Labs in Italian
