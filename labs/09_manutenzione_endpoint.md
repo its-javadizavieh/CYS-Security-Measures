@@ -1,12 +1,12 @@
-# Lab 09 — Manutenzione e Smaltimento Endpoint
+# Lab 09 - Manutenzione e Smaltimento Endpoint
 
 ## Obiettivo
 
-Configurare un backup, verificare il ripristino e praticare la cancellazione sicura dei dati su **Windows**, **Ubuntu/Linux** e **macOS**.
+Configurare un backup, verificare il ripristino, praticare la cancellazione sicura dei dati e decidere come dismettere o riutilizzare un endpoint su **Windows**, **Ubuntu/Linux** e **macOS**.
 
 ## Durata
 
-60 minuti
+105-120 minuti
 
 ## Prerequisiti
 
@@ -21,9 +21,9 @@ Un vecchio PC della scuola deve essere dismesso. Dovete prima fare un backup dei
 
 ## Step
 
-### Parte A — Backup e Ripristino (25 min)
+### Parte A - Backup e Ripristino (25 min)
 
-**Step 1 — Creare dei file da proteggere**
+**Step 1 - Creare dei file da proteggere**
 
 **Ubuntu/Linux e macOS**
 
@@ -47,7 +47,7 @@ Get-ChildItem "$HOME\dati_scuola"
 
 ---
 
-**Step 2 — Fare il backup**
+**Step 2 - Fare il backup**
 
 **Ubuntu/Linux e macOS**
 
@@ -67,7 +67,7 @@ Get-ChildItem "$HOME\backup_scuola"
 
 ---
 
-**Step 3 — Verificare il backup**
+**Step 3 - Verificare il backup**
 
 **Ubuntu/Linux e macOS**
 
@@ -87,7 +87,7 @@ Compare-Object $original $backup
 
 ---
 
-**Step 4 — Simulare un problema e ripristinare**
+**Step 4 - Simulare un problema e ripristinare**
 
 **Ubuntu/Linux e macOS**
 
@@ -119,17 +119,17 @@ Get-Content "$HOME\dati_scuola\registro.txt"
 
 ---
 
-### Parte B — Cancellazione Sicura (20 min)
+### Parte B - Cancellazione Sicura (20 min)
 
-**Step 5 — Capire perché "Elimina" non basta**
+**Step 5 - Capire perché "Elimina" non basta**
 
 > Quando "eliminate" un file normalmente (Cestino → Svuota), il sistema operativo rimuove solo il **riferimento** al file. I dati restano sul disco finché non vengono sovrascritti! Questo significa che con tool appositi (Recuva, photorec) i file possono essere **recuperati**.
 
 ---
 
-**Step 6 — Cancellazione sicura**
+**Step 6 - Cancellazione sicura**
 
-**Ubuntu/Linux — shred**
+**Ubuntu/Linux - shred**
 
 ```bash
 # Creare un file segreto
@@ -149,7 +149,7 @@ cat ~/file_segreto.txt
 rm ~/file_segreto.txt
 ```
 
-**macOS — rm -P (o gshred)**
+**macOS - rm -P (o gshred)**
 
 ```bash
 # Creare un file segreto
@@ -169,7 +169,7 @@ rm ~/file_segreto.txt
 
 > **Nota su SSD e macOS:** i Mac moderni con SSD usano TRIM e hanno il T2/M1/M2 chip con cifratura hardware. Per la dismissione completa, il metodo migliore è: FileVault (già visto nel Lab 05) + "Inizializza tutti i contenuti e le impostazioni" da Impostazioni di Sistema.
 
-**Windows — cipher /w (o SDelete)**
+**Windows - cipher /w (o SDelete)**
 
 ```powershell
 # Creare un file segreto
@@ -197,7 +197,7 @@ Per cancellazione sicura di file specifici, scaricare **SDelete** (Microsoft Sys
 
 ---
 
-**Step 7 — Cancellazione sicura di una cartella intera**
+**Step 7 - Cancellazione sicura di una cartella intera**
 
 **Ubuntu/Linux**
 
@@ -237,9 +237,9 @@ cipher /w:"$HOME"
 
 ---
 
-### Parte C — Certificato di Dismissione (15 min)
+### Parte C - Certificato di Dismissione (15 min)
 
-**Step 8 — Compilare un certificato di dismissione**
+**Step 8 - Compilare un certificato di dismissione**
 
 Compilate questo modulo (su carta o in un file di testo):
 
@@ -277,14 +277,46 @@ Firma responsabile: ________
 
 ---
 
-**Step 9 — Sfida: quando usare quale metodo?**
+**Step 9 - Sfida: quando usare quale metodo?**
 
-| Situazione | Metodo consigliato | OS |
-|-----------|-------------------|-----|
-| Cancellare pochi file riservati | _____ | _____ |
-| Dismissione completa di un PC | _____ | _____ |
-| Dati top-secret / militari | _____ | _____ |
-| PC con disco cifrato (BitLocker/FileVault/LUKS) | _____ | _____ |
+| Situazione                                      | Metodo consigliato | OS     |
+| ----------------------------------------------- | ------------------ | ------ |
+| Cancellare pochi file riservati                 | **\_**             | **\_** |
+| Dismissione completa di un PC                   | **\_**             | **\_** |
+| Dati top-secret / militari                      | **\_**             | **\_** |
+| PC con disco cifrato (BitLocker/FileVault/LUKS) | **\_**             | **\_** |
+
+---
+
+### Parte D - Decisione di fine vita e consegna (20 min)
+
+**Step 10 - Scheda asset e decisione**
+
+Compilate una mini-scheda per decidere se il dispositivo va riutilizzato o dismesso:
+
+| Campo | Valore |
+| ----- | ------ |
+| Età del dispositivo | **_** |
+| OS ancora supportato? | **_** |
+| Disco cifrato? | **_** |
+| Backup completato? | **_** |
+| Destinazione scelta | **_** |
+
+Destinazioni possibili: `riutilizzo interno`, `riciclaggio`, `vendita/donazione`, `distruzione fisica`.
+
+---
+
+**Step 11 - Checklist finale prima della consegna**
+
+Scrivete una checklist da 5 punti con almeno queste voci:
+
+- backup verificato
+- account rimossi o accessi revocati
+- metodo di sanitizzazione eseguito
+- certificato compilato e archiviato
+- destinazione del device confermata
+
+L'idea è chiudere il ciclo di vita con una procedura, non con un gesto improvvisato.
 
 ---
 
@@ -293,6 +325,8 @@ Firma responsabile: ________
 - Backup creato e ripristinato con successo su tutti gli OS
 - Cancellazione sicura eseguita con lo strumento appropriato per il proprio OS
 - Certificato di dismissione compilato
+- Scheda asset compilata con destinazione scelta
+- Checklist finale di handoff/disposal pronta
 
 ## Checkpoint
 
@@ -302,17 +336,21 @@ Firma responsabile: ________
 - [ ] Differenza tra "elimina" e "cancellazione sicura" compresa
 - [ ] Certificato di dismissione compilato
 - [ ] Tabella "quale metodo usare" completata
+- [ ] Scheda asset e decisione completate
+- [ ] Checklist finale pronta
 
 ## Troubleshooting rapido
 
-| Problema | Soluzione |
-|----------|----------|
-| `shred: command not found` (Linux) | `sudo apt install coreutils` (quasi sempre già installato) |
-| `gshred: command not found` (macOS) | `brew install coreutils` |
-| `rm -P` non funziona (macOS recente) | Apple ha rimosso `-P` sulle versioni più recenti; usare `gshred` |
-| `rsync: command not found` | Linux: `sudo apt install rsync`; macOS: preinstallato |
-| `cipher /w` impiega molto tempo | È normale — sovrascrive TUTTO lo spazio libero del disco |
-| shred non funziona bene su SSD | Su SSD usare la cifratura (BitLocker/FileVault/LUKS) + wipe; shred è progettato per HDD |
+| Problema                             | Soluzione                                                                               |
+| ------------------------------------ | --------------------------------------------------------------------------------------- |
+| `shred: command not found` (Linux)   | `sudo apt install coreutils` (quasi sempre già installato)                              |
+| `gshred: command not found` (macOS)  | `brew install coreutils`                                                                |
+| `rm -P` non funziona (macOS recente) | Apple ha rimosso `-P` sulle versioni più recenti; usare `gshred`                        |
+| `rsync: command not found`           | Linux: `sudo apt install rsync`; macOS: preinstallato                                   |
+| `cipher /w` impiega molto tempo      | È normale - sovrascrive TUTTO lo spazio libero del disco                                |
+| shred non funziona bene su SSD       | Su SSD usare la cifratura (BitLocker/FileVault/LUKS) + wipe; shred è progettato per HDD |
+| Non so se riutilizzare o dismettere  | Guardare supporto OS, stato del disco, classificazione dati e costo di gestione         |
+| SSD cifrato da dismettere            | Preferire cancellazione crittografica o reset/wipe del vendor, poi documentare          |
 
 ## Cleanup obbligatorio
 
@@ -349,14 +387,14 @@ Remove-Item -Recurse -Force "$HOME\cartella_segreta" -ErrorAction SilentlyContin
 <details>
 <summary>Soluzione Step 6: confronto strumenti cancellazione sicura per OS</summary>
 
-| OS | Strumento | Comando | Tipo |
-|----|-----------|---------|------|
-| Ubuntu/Linux | `shred` | `shred -vfz -n 3 file.txt` | File singolo; sovrascrive con dati random + zeri |
-| macOS | `gshred` (via coreutils) | `gshred -vfz -n 3 file.txt` | Identico a shred di Linux |
-| macOS (alternativa) | Inizializza Mac | Impostazioni → Generali → Trasferisci o inizializza | Wipe completo del dispositivo |
-| Windows | `cipher /w` | `cipher /w:C:\` | Sovrascrive spazio libero (non file specifici) |
-| Windows | `SDelete` (Sysinternals) | `sdelete -p 3 file.txt` | File singolo |
-| Tutti | DBAN (Darik's Boot and Nuke) | Boot da USB → wipe intero disco | Dismissione completa |
+| OS                  | Strumento                    | Comando                                             | Tipo                                             |
+| ------------------- | ---------------------------- | --------------------------------------------------- | ------------------------------------------------ |
+| Ubuntu/Linux        | `shred`                      | `shred -vfz -n 3 file.txt`                          | File singolo; sovrascrive con dati random + zeri |
+| macOS               | `gshred` (via coreutils)     | `gshred -vfz -n 3 file.txt`                         | Identico a shred di Linux                        |
+| macOS (alternativa) | Inizializza Mac              | Impostazioni → Generali → Trasferisci o inizializza | Wipe completo del dispositivo                    |
+| Windows             | `cipher /w`                  | `cipher /w:C:\`                                     | Sovrascrive spazio libero (non file specifici)   |
+| Windows             | `SDelete` (Sysinternals)     | `sdelete -p 3 file.txt`                             | File singolo                                     |
+| Tutti               | DBAN (Darik's Boot and Nuke) | Boot da USB → wipe intero disco                     | Dismissione completa                             |
 
 **Nota importante per SSD:**
 Gli SSD gestiscono la scrittura in modo diverso dagli HDD (wear leveling, TRIM). Per gli SSD il metodo più sicuro è:
@@ -409,12 +447,12 @@ Compare-Object $orig $rest
 <details>
 <summary>Soluzione Step 9: quale metodo per quale situazione</summary>
 
-| Situazione | Metodo consigliato | OS |
-|-----------|-------------------|-----|
-| Cancellare pochi file riservati | **shred** / **gshred** / **SDelete** | Linux / macOS / Windows |
-| Dismissione completa di un PC | **DBAN** (boot da USB) oppure **Inizializza** (macOS) oppure **Reset PC** (Windows) | Tutti |
-| Dati top-secret / militari | **Distruzione fisica** (trapano, tritatutto industriale, degaussing) | N/A — hardware |
-| PC con disco cifrato (BitLocker/FileVault/LUKS) | **Cifratura + distruzione chiave** → i dati restano ma sono illeggibili | Tutti |
+| Situazione                                      | Metodo consigliato                                                                  | OS                      |
+| ----------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------- |
+| Cancellare pochi file riservati                 | **shred** / **gshred** / **SDelete**                                                | Linux / macOS / Windows |
+| Dismissione completa di un PC                   | **DBAN** (boot da USB) oppure **Inizializza** (macOS) oppure **Reset PC** (Windows) | Tutti                   |
+| Dati top-secret / militari                      | **Distruzione fisica** (trapano, tritatutto industriale, degaussing)                | N/A - hardware          |
+| PC con disco cifrato (BitLocker/FileVault/LUKS) | **Cifratura + distruzione chiave** → i dati restano ma sono illeggibili             | Tutti                   |
 
 **Best practice aziendale:**
 
@@ -425,5 +463,33 @@ Compare-Object $orig $rest
 5. **Verificare** che i dati non siano recuperabili
 6. **Documentare** tutto nel certificato di dismissione
 7. **Smaltire** il dispositivo secondo le normative RAEE
+
+</details>
+
+<details>
+<summary>Soluzione Step 10: esempio scheda asset e decisione</summary>
+
+| Campo | Esempio |
+| ----- | ------- |
+| Età del dispositivo | 7 anni |
+| OS ancora supportato? | No |
+| Disco cifrato? | Sì, BitLocker |
+| Backup completato? | Sì |
+| Destinazione scelta | Riciclaggio |
+
+Logica: se il device è vecchio, non più supportato e costoso da mantenere, la scelta corretta tende verso la dismissione. Se invece è ancora supportato e dopo il wipe può tornare utile, può essere riutilizzato internamente.
+
+</details>
+
+<details>
+<summary>Soluzione Step 11: esempio checklist finale</summary>
+
+```text
+1. Backup verificato con almeno un test di ripristino.
+2. Account utente rimossi o accessi revocati.
+3. Sanitizzazione eseguita con il metodo scelto per il tipo di disco.
+4. Certificato di dismissione compilato e archiviato.
+5. Destinazione finale del device confermata e registrata.
+```
 
 </details>

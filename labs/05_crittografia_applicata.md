@@ -1,12 +1,12 @@
-# Lab 05 — Crittografia Applicata
+# Lab 05 - Crittografia Applicata
 
 ## Obiettivo
 
-Cifrare un disco/volume con **BitLocker** (Windows), **LUKS** (Linux), **FileVault** (macOS) e usare **GPG** per cifrare e firmare file su tutti e tre gli OS.
+Cifrare un disco/volume con **BitLocker** (Windows), **LUKS** (Linux), **FileVault** (macOS) e usare **GPG** per cifrare e firmare file su tutti e tre gli OS, ragionando anche su recovery key, verifica firme e scelte operative corrette.
 
 ## Durata
 
-60 minuti
+105-120 minuti
 
 ## Prerequisiti
 
@@ -24,13 +24,13 @@ L'azienda richiede che tutti i laptop abbiano il disco cifrato e che i documenti
 
 ## Step
 
-### Parte A — Cifratura Disco (25 min)
+### Parte A - Cifratura Disco (25 min)
 
 Scegliete la sezione del vostro OS.
 
-#### Windows — BitLocker
+#### Windows - BitLocker
 
-**Step 1 — Verificare se BitLocker è disponibile**
+**Step 1 - Verificare se BitLocker è disponibile**
 
 ```powershell
 Get-BitLockerVolume -MountPoint "C:"
@@ -38,7 +38,7 @@ Get-BitLockerVolume -MountPoint "C:"
 
 > BitLocker è disponibile solo su Windows 10/11 **Pro/Enterprise**. Se avete Home, leggete la sezione e osservate il docente.
 
-**Step 2 — Attivare BitLocker su C:**
+**Step 2 - Attivare BitLocker su C:**
 
 1. Pannello di Controllo → Sistema e sicurezza → Crittografia unità BitLocker
 2. Cliccare "Attiva BitLocker" accanto a C:
@@ -49,7 +49,7 @@ Get-BitLockerVolume -MountPoint "C:"
 4. Scegliere "Cifra l'intera unità"
 5. Avviare la crittografia (può richiedere tempo)
 
-**Step 3 — Verificare lo stato**
+**Step 3 - Verificare lo stato**
 
 ```powershell
 manage-bde -status C:
@@ -59,15 +59,15 @@ manage-bde -status C:
 
 ---
 
-#### Ubuntu/Linux — LUKS (volume virtuale)
+#### Ubuntu/Linux - LUKS (volume virtuale)
 
-**Step 1 — Creare un file che simula un disco**
+**Step 1 - Creare un file che simula un disco**
 
 ```bash
 dd if=/dev/zero of=~/disco_test.img bs=1M count=50
 ```
 
-**Step 2 — Associarlo, formattare con LUKS e montare**
+**Step 2 - Associarlo, formattare con LUKS e montare**
 
 ```bash
 sudo losetup /dev/loop10 ~/disco_test.img
@@ -80,7 +80,7 @@ sudo mkdir -p /mnt/vault
 sudo mount /dev/mapper/vault_test /mnt/vault
 ```
 
-**Step 3 — Scrivere un file e verificare la cifratura**
+**Step 3 - Scrivere un file e verificare la cifratura**
 
 ```bash
 echo "Dati super segreti nel volume cifrato!" | sudo tee /mnt/vault/segreto.txt
@@ -95,16 +95,16 @@ sudo strings ~/disco_test.img | grep "segreti"
 
 ---
 
-#### macOS — FileVault
+#### macOS - FileVault
 
-**Step 1 — Verificare lo stato di FileVault**
+**Step 1 - Verificare lo stato di FileVault**
 
 ```bash
 sudo fdesetup status
 # Output: "FileVault is On." oppure "FileVault is Off."
 ```
 
-**Step 2 — Attivare FileVault (se Off)**
+**Step 2 - Attivare FileVault (se Off)**
 
 1. Impostazioni di Sistema → Privacy e Sicurezza → FileVault → **Attiva**
 2. Scegliere il metodo di recupero:
@@ -119,7 +119,7 @@ sudo fdesetup enable
 # Mostra la chiave di recupero → SALVARLA in un luogo sicuro!
 ```
 
-**Step 3 — Verificare dopo l'attivazione**
+**Step 3 - Verificare dopo l'attivazione**
 
 ```bash
 sudo fdesetup status
@@ -129,11 +129,11 @@ sudo fdesetup status
 
 ---
 
-### Parte B — GPG: Cifratura e Firma (35 min)
+### Parte B - GPG: Cifratura e Firma (35 min)
 
 I comandi GPG sono **identici su tutti gli OS** dopo l'installazione.
 
-**Step 4 — Installare GPG (se necessario)**
+**Step 4 - Installare GPG (se necessario)**
 
 **Ubuntu/Linux**: preinstallato (`gpg --version`)
 
@@ -152,19 +152,19 @@ gpg --version
 
 ---
 
-**Step 5 — Generare le chiavi GPG**
+**Step 5 - Generare le chiavi GPG**
 
 ```bash
 gpg --full-generate-key
 # Selezionare:
 # Tipo: 1 (RSA and RSA)
 # Lunghezza: 2048
-# Scadenza: 0 (non scade — per il lab va bene)
+# Scadenza: 0 (non scade - per il lab va bene)
 # Nome e email: usare dati di test
 # Passphrase: inventarne una
 ```
 
-**Step 6 — Vedere le chiavi**
+**Step 6 - Vedere le chiavi**
 
 ```bash
 gpg --list-keys
@@ -173,7 +173,7 @@ gpg --list-secret-keys
 
 ---
 
-**Step 7 — Cifrare un file con GPG**
+**Step 7 - Cifrare un file con GPG**
 
 ```bash
 echo "Documento riservato per il capo" > documento.txt
@@ -184,7 +184,7 @@ cat documento.txt.gpg
 # Output: illeggibile → cifrato!
 ```
 
-**Step 8 — Decifrare il file**
+**Step 8 - Decifrare il file**
 
 ```bash
 gpg --decrypt documento.txt.gpg > documento_decifrato.txt
@@ -194,7 +194,7 @@ cat documento_decifrato.txt
 
 ---
 
-**Step 9 — Firmare un file e verificare la firma**
+**Step 9 - Firmare un file e verificare la firma**
 
 ```bash
 # Firmare
@@ -213,11 +213,53 @@ gpg --verify documento.txt.sig documento.txt
 
 ---
 
+### Parte C - Decisioni operative e gestione incidenti (20 min)
+
+**Step 10 - Pianificare dove salvare la recovery key**
+
+Compilate una tabella con almeno un'opzione accettabile e una non accettabile per la recovery key del vostro OS.
+
+| Opzione                              | Accettabile? | Perché                                          |
+| ------------------------------------ | ------------ | ----------------------------------------------- |
+| Password manager                     | Sì           | Separato dal device e facile da recuperare      |
+| Chiavetta USB in cassaforte          | Sì           | Supporto separato e fisicamente protetto        |
+| File sul desktop dello stesso laptop | No           | Se perdo il laptop, perdo anche la recovery key |
+
+Aggiungete una quarta riga con una vostra proposta motivata.
+
+---
+
+**Step 11 - Scegliere la protezione corretta in tre scenari**
+
+Per ogni scenario indicate lo strumento principale e la prima azione corretta:
+
+| Scenario                                    | Strumento/controllo principale | Prima azione corretta                                                                 |
+| ------------------------------------------- | ------------------------------ | ------------------------------------------------------------------------------------- |
+| Laptop aziendale smarrito                   | BitLocker / LUKS / FileVault   | Verificare che la cifratura sia attiva e usare la procedura aziendale di segnalazione |
+| Documento riservato da inviare a un collega | GPG                            | Cifrare per il destinatario corretto e verificare l'identità della chiave             |
+| Firma digitale risultata `BAD signature`    | Verifica integrità             | Fermarsi e non fidarsi del file finché non si chiarisce l'origine della modifica      |
+
+---
+
+**Step 12 - Checklist finale di risposta operativa**
+
+Scrivete una checklist da 5 punti che risponda a una di queste situazioni:
+
+- il laptop cifrato viene perso o rubato
+- ricevete un file con firma digitale fallita
+
+La checklist deve contenere almeno una azione tecnica e una azione di escalation/comunicazione.
+
+---
+
 ## Output atteso
 
 - Disco/volume cifrato verificato (BitLocker / LUKS / FileVault)
 - File GPG cifrato e decifrato correttamente
 - Firma digitale creata, verificata, e "BAD signature" dopo modifica
+- Tabella recovery key completata con scelte motivate
+- Tabella scenari/strumenti completata
+- Checklist finale di risposta operativa pronta
 
 ## Checkpoint
 
@@ -227,18 +269,23 @@ gpg --verify documento.txt.sig documento.txt
 - [ ] File cifrato con GPG e decifrato
 - [ ] Firma "Good signature" verificata
 - [ ] Firma "BAD signature" dopo modifica del file
+- [ ] Piano di salvataggio recovery key completato
+- [ ] Scelta corretta degli strumenti nei 3 scenari
+- [ ] Checklist finale pronta
 
 ## Troubleshooting rapido
 
-| Problema | Soluzione |
-|----------|----------|
+| Problema                                 | Soluzione                                                                                        |
+| ---------------------------------------- | ------------------------------------------------------------------------------------------------ |
 | BitLocker non disponibile (Windows Home) | BitLocker richiede Pro/Enterprise. Osservare il docente o usare VeraCrypt (alternativa gratuita) |
-| `cryptsetup: command not found` (Linux) | `sudo apt install cryptsetup` |
-| Loop device occupato (Linux) | `sudo losetup -d /dev/loop10` |
-| `gpg: command not found` (macOS) | `brew install gnupg` |
-| `gpg: command not found` (Windows) | Installare Gpg4win o usare Git Bash |
-| GPG si blocca alla generazione chiavi | Muovere il mouse / digitare per generare entropia |
-| FileVault: "not supported" | Verificare di avere macOS 10.10+ su hardware supportato |
+| `cryptsetup: command not found` (Linux)  | `sudo apt install cryptsetup`                                                                    |
+| Loop device occupato (Linux)             | `sudo losetup -d /dev/loop10`                                                                    |
+| `gpg: command not found` (macOS)         | `brew install gnupg`                                                                             |
+| `gpg: command not found` (Windows)       | Installare Gpg4win o usare Git Bash                                                              |
+| GPG si blocca alla generazione chiavi    | Muovere il mouse / digitare per generare entropia                                                |
+| FileVault: "not supported"               | Verificare di avere macOS 10.10+ su hardware supportato                                          |
+| Non so dove mettere la recovery key      | Scegliere un posto separato dal device: password manager, USB dedicata o cassaforte              |
+| `BAD signature` su un file urgente       | Non aprire o distribuire il file: verificare mittente, integrità e canale di consegna            |
 
 ## Cleanup obbligatorio
 
@@ -281,7 +328,7 @@ Remove-Item documento.txt, documento.txt.gpg, documento.txt.sig, documento_decif
 <details>
 <summary>Soluzione Parte A: verifica cifratura disco per ogni OS</summary>
 
-**Windows — BitLocker**
+**Windows - BitLocker**
 
 ```powershell
 manage-bde -status C:
@@ -298,7 +345,7 @@ Volume C: []
     Key Protectors:       TPM, Recovery Password
 ```
 
-**Ubuntu/Linux — LUKS**
+**Ubuntu/Linux - LUKS**
 
 ```bash
 # Dopo aver montato il volume:
@@ -323,7 +370,7 @@ sudo strings ~/disco_test.img | grep "segreti"
 # Nessun risultato = cifratura funzionante ✓
 ```
 
-**macOS — FileVault**
+**macOS - FileVault**
 
 ```bash
 sudo fdesetup status
@@ -336,7 +383,7 @@ sudo fdesetup list
 </details>
 
 <details>
-<summary>Soluzione Step 9: firma digitale — Good vs BAD signature</summary>
+<summary>Soluzione Step 9: firma digitale - Good vs BAD signature</summary>
 
 **Good signature (file originale non modificato):**
 
@@ -379,17 +426,45 @@ gpg: BAD signature from "Nome Test <email_di_test@example.com>"
 
 **Regola d'oro: MAI salvare la chiave di recupero sullo stesso dispositivo cifrato!**
 
-| Metodo | Sicurezza | Praticità |
-|--------|-----------|-----------|
-| Password manager (Bitwarden/KeePassXC) | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ |
-| Chiavetta USB dedicata in cassaforte | ⭐⭐⭐⭐ | ⭐⭐⭐ |
-| Foglio stampato in cassaforte | ⭐⭐⭐ | ⭐⭐ |
-| Account Microsoft/Apple (per BitLocker/FileVault) | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
+| Metodo                                            | Sicurezza  | Praticità  |
+| ------------------------------------------------- | ---------- | ---------- |
+| Password manager (Bitwarden/KeePassXC)            | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐   |
+| Chiavetta USB dedicata in cassaforte              | ⭐⭐⭐⭐   | ⭐⭐⭐     |
+| Foglio stampato in cassaforte                     | ⭐⭐⭐     | ⭐⭐       |
+| Account Microsoft/Apple (per BitLocker/FileVault) | ⭐⭐⭐     | ⭐⭐⭐⭐⭐ |
 
 **Metodi da NON usare:**
 
 - ❌ File sul desktop dello stesso PC cifrato
 - ❌ Email a sé stessi (potrebbe essere compromessa)
 - ❌ Post-it attaccato al monitor
+
+</details>
+
+<details>
+<summary>Soluzione Step 11: scelta corretta negli scenari</summary>
+
+Una risposta corretta segue questa logica:
+
+| Scenario             | Scelta corretta                    | Motivo                                                                           |
+| -------------------- | ---------------------------------- | -------------------------------------------------------------------------------- |
+| Laptop smarrito      | **Cifratura disco + segnalazione** | La cifratura riduce l'impatto, ma va comunque attivata la procedura di incidente |
+| Documento da inviare | **GPG**                            | Protegge il contenuto per un destinatario specifico                              |
+| Firma fallita        | **Bloccare il flusso**             | `BAD signature` significa che autenticità o integrità non sono affidabili        |
+
+</details>
+
+<details>
+<summary>Soluzione Step 12: esempio di checklist finale</summary>
+
+Esempio corretto per "firma digitale fallita":
+
+```text
+1. Non apro ulteriormente il file e non lo inoltro.
+2. Verifico il mittente con un canale separato.
+3. Confronto nome file, hash o nuova copia se disponibile.
+4. Segnalo il caso al referente IT o al docente.
+5. Documento l'evento e la decisione presa.
+```
 
 </details>

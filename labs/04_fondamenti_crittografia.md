@@ -1,12 +1,12 @@
-# Lab 04 — Fondamenti di Crittografia
+# Lab 04 - Fondamenti di Crittografia
 
 ## Obiettivo
 
-Sperimentare hashing (SHA-256), cifratura simmetrica (AES) e cifratura asimmetrica (RSA) su **Windows**, **Ubuntu/Linux** e **macOS**.
+Sperimentare hashing (SHA-256), cifratura simmetrica (AES) e cifratura asimmetrica (RSA) su **Windows**, **Ubuntu/Linux** e **macOS**, scegliendo anche quale tecnica usare nei diversi scenari pratici.
 
 ## Durata
 
-60 minuti
+105-120 minuti
 
 ## Prerequisiti
 
@@ -23,9 +23,9 @@ Il vostro capo vi chiede di dimostrare che sapete cifrare un file riservato e ve
 
 ## Step
 
-### Parte A — Hashing con SHA-256 (15 min)
+### Parte A - Hashing con SHA-256 (15 min)
 
-**Step 1 — Creare un file di test**
+**Step 1 - Creare un file di test**
 
 **Ubuntu/Linux e macOS**
 
@@ -43,7 +43,7 @@ Get-Content messaggio.txt
 
 ---
 
-**Step 2 — Calcolare l'hash SHA-256**
+**Step 2 - Calcolare l'hash SHA-256**
 
 **Ubuntu/Linux**
 
@@ -67,7 +67,7 @@ Get-FileHash messaggio.txt -Algorithm SHA256
 
 ---
 
-**Step 3 — Modificare il file e ricalcolare**
+**Step 3 - Modificare il file e ricalcolare**
 
 Aggiungete un singolo punto al messaggio e ricalcolate l'hash:
 
@@ -90,16 +90,16 @@ Get-FileHash messaggio.txt -Algorithm SHA256
 
 ---
 
-### Parte B — Cifratura Simmetrica con AES (20 min)
+### Parte B - Cifratura Simmetrica con AES (20 min)
 
-**Step 4 — Cifrare un file con AES-256**
+**Step 4 - Cifrare un file con AES-256**
 
 **Ubuntu/Linux e macOS**
 
 ```bash
 echo "Piano strategico riservato" > segreto.txt
 openssl enc -aes-256-cbc -salt -pbkdf2 -in segreto.txt -out segreto.enc
-# Vi chiederà una password — inventatene una e ricordatela!
+# Vi chiederà una password - inventatene una e ricordatela!
 ```
 
 **Windows (con openssl via Git Bash o WSL)**
@@ -118,7 +118,7 @@ openssl enc -aes-256-cbc -salt -pbkdf2 -in segreto.txt -out segreto.enc
 
 ---
 
-**Step 5 — Verificare che il file cifrato non è leggibile**
+**Step 5 - Verificare che il file cifrato non è leggibile**
 
 **Ubuntu/Linux e macOS**
 
@@ -136,7 +136,7 @@ Get-Content segreto.enc
 
 ---
 
-**Step 6 — Decifrare il file**
+**Step 6 - Decifrare il file**
 
 **Ubuntu/Linux e macOS**
 
@@ -156,9 +156,9 @@ cat rivelato.txt
 
 ---
 
-### Parte C — Cifratura Asimmetrica con RSA (25 min)
+### Parte C - Cifratura Asimmetrica con RSA (25 min)
 
-**Step 7 — Generare una coppia di chiavi RSA**
+**Step 7 - Generare una coppia di chiavi RSA**
 
 **Ubuntu/Linux e macOS**
 
@@ -185,7 +185,7 @@ $rsa.ExportRSAPrivateKeyPem() | Set-Content chiave_privata.pem
 
 ---
 
-**Step 8 — Vedere le chiavi**
+**Step 8 - Vedere le chiavi**
 
 **Tutti gli OS**
 
@@ -196,11 +196,11 @@ Get-Content chiave_pubblica.pem    # Windows PowerShell
 ```
 
 > La chiave pubblica potete condividerla con chiunque.
-> La chiave privata è **SEGRETA** — non condividerla MAI!
+> La chiave privata è **SEGRETA** - non condividerla MAI!
 
 ---
 
-**Step 9 — Cifrare con la chiave pubblica e decifrare con la privata**
+**Step 9 - Cifrare con la chiave pubblica e decifrare con la privata**
 
 **Ubuntu/Linux e macOS**
 
@@ -216,7 +216,36 @@ cat msg_decifrato.txt
 
 **Windows (con openssl)**
 
-Stessi comandi — openssl è identico su tutti gli OS.
+Stessi comandi - openssl è identico su tutti gli OS.
+
+---
+
+### Parte D - Scegliere la tecnica corretta (20 min)
+
+**Step 10 - Associare problema e strumento**
+
+Compilate una mini-tabella con almeno questi tre scenari:
+
+| Scenario                                                                      | Obiettivo                                  | Strumento principale | Nota operativa                                 |
+| ----------------------------------------------------------------------------- | ------------------------------------------ | -------------------- | ---------------------------------------------- |
+| Verificare una ISO scaricata                                                  | Integrità                                  | SHA-256              | Confrontare hash calcolato con hash pubblicato |
+| Proteggere un file riservato con password condivisa a voce                    | Confidenzialità                            | AES                  | La password deve passare su un canale separato |
+| Inviare un messaggio segreto a un destinatario che ha già una chiave pubblica | Confidenzialità senza condividere password | RSA o GPG            | La chiave privata resta solo al destinatario   |
+
+Aggiungete poi una quarta riga con un vostro esempio reale o plausibile.
+
+---
+
+**Step 11 - Mini-report tecnico finale**
+
+Scrivete 5-7 righe finali che rispondano a queste domande:
+
+- Quando basta un hash e quando non basta?
+- Perché AES è più adatto di RSA per file o contenuti grandi?
+- Qual è il rischio operativo se una chiave privata viene condivisa?
+- Quale comando del lab usereste di nuovo in un contesto reale?
+
+Il report può essere un file `report_crittografia.txt` oppure una sezione finale nel vostro quaderno di laboratorio.
 
 ---
 
@@ -225,6 +254,8 @@ Stessi comandi — openssl è identico su tutti gli OS.
 - Hash SHA-256 calcolato e confrontato (diverso con qualsiasi modifica)
 - File cifrato con AES e decifrato correttamente
 - Chiavi RSA generate, file cifrato con la pubblica e decifrato con la privata
+- Tabella scenari/strumenti compilata con almeno 4 casi
+- Mini-report finale con scelte motivate e limiti dei vari strumenti
 
 ## Checkpoint
 
@@ -233,17 +264,20 @@ Stessi comandi — openssl è identico su tutti gli OS.
 - [ ] File decifrato (`rivelato.txt`) contiene il testo originale
 - [ ] Chiavi RSA generate (`chiave_privata.pem` e `chiave_pubblica.pem`)
 - [ ] Cifratura/decifratura RSA funzionante
+- [ ] Tabella scenario -> tecnica completata
+- [ ] Mini-report finale completato
 
 ## Troubleshooting rapido
 
-| Problema | Soluzione |
-|----------|----------|
-| `openssl: command not found` (Linux) | `sudo apt install openssl` |
-| `openssl: command not found` (macOS) | Preinstallato; se manca: `brew install openssl` |
-| `openssl: command not found` (Windows) | Installare Git Bash (include openssl) o usare WSL |
-| Errore "bad decrypt" | Avete inserito la password sbagliata al momento della decifratura |
-| Errore RSA "data too large" | RSA cifra solo dati piccoli (max ~245 byte per 2048-bit). Per file grandi usare AES |
-| `shasum` non trovato (macOS) | `brew install coreutils` per avere `gsha256sum` |
+| Problema                               | Soluzione                                                                           |
+| -------------------------------------- | ----------------------------------------------------------------------------------- |
+| `openssl: command not found` (Linux)   | `sudo apt install openssl`                                                          |
+| `openssl: command not found` (macOS)   | Preinstallato; se manca: `brew install openssl`                                     |
+| `openssl: command not found` (Windows) | Installare Git Bash (include openssl) o usare WSL                                   |
+| Non so se usare hash o cifratura       | Chiedersi prima se serve **integrità** (hash) o **confidenzialità** (AES/RSA)       |
+| Errore "bad decrypt"                   | Avete inserito la password sbagliata al momento della decifratura                   |
+| Errore RSA "data too large"            | RSA cifra solo dati piccoli (max ~245 byte per 2048-bit). Per file grandi usare AES |
+| `shasum` non trovato (macOS)           | `brew install coreutils` per avere `gsha256sum`                                     |
 
 ## Cleanup obbligatorio
 
@@ -278,7 +312,7 @@ Remove-Item msg.txt, msg.enc, msg_decifrato.txt -ErrorAction SilentlyContinue
 <details>
 <summary>Soluzione Step 3: perché l'hash cambia completamente</summary>
 
-**Concetto chiave — Effetto valanga (Avalanche Effect)**
+**Concetto chiave - Effetto valanga (Avalanche Effect)**
 
 Anche modificando un solo bit dell'input, l'hash cambia completamente. Esempio:
 
@@ -294,11 +328,11 @@ I due hash non hanno **nessuna somiglianza**. Questo è fondamentale per:
 
 **Comandi riassuntivi per ogni OS:**
 
-| OS | Comando |
-|----|---------|
-| Ubuntu/Linux | `sha256sum nomefile.txt` |
-| macOS | `shasum -a 256 nomefile.txt` |
-| Windows | `Get-FileHash nomefile.txt -Algorithm SHA256` |
+| OS           | Comando                                       |
+| ------------ | --------------------------------------------- |
+| Ubuntu/Linux | `sha256sum nomefile.txt`                      |
+| macOS        | `shasum -a 256 nomefile.txt`                  |
+| Windows      | `Get-FileHash nomefile.txt -Algorithm SHA256` |
 
 </details>
 
@@ -336,7 +370,7 @@ Il flag `-d` indica la decifratura. La password deve essere **identica** a quell
 </details>
 
 <details>
-<summary>Soluzione Step 9: cifratura asimmetrica RSA — flusso completo</summary>
+<summary>Soluzione Step 9: cifratura asimmetrica RSA - flusso completo</summary>
 
 **Flusso:**
 
@@ -366,5 +400,34 @@ openssl pkeyutl -decrypt -inkey chiave_privata.pem -in msg.enc -out msg_decifrat
 ```
 
 **Limite di RSA**: può cifrare solo dati piccoli (~245 byte con chiave da 2048 bit). Per file grandi, si usa **cifratura ibrida**: RSA cifra una chiave AES, poi AES cifra i dati (è quello che fa HTTPS!).
+
+</details>
+
+<details>
+<summary>Soluzione Step 10: come scegliere tra hash, AES e RSA</summary>
+
+Una risposta corretta segue questa logica:
+
+| Se il problema è...                                                    | Allora uso...        | Perché                                                  |
+| ---------------------------------------------------------------------- | -------------------- | ------------------------------------------------------- |
+| Verificare se un file è cambiato                                       | **SHA-256**          | L'hash controlla l'integrità, non nasconde il contenuto |
+| Proteggere un file grande con una password condivisa                   | **AES**              | È veloce e adatto a file grandi                         |
+| Proteggere un messaggio per un destinatario che ha una chiave pubblica | **RSA / GPG**        | Evita di condividere una password segreta               |
+| Proteggere file grandi per un destinatario specifico                   | **Cifratura ibrida** | AES cifra il file, RSA protegge la chiave AES           |
+
+</details>
+
+<details>
+<summary>Soluzione Step 11: esempio di mini-report finale</summary>
+
+Esempio sintetico corretto:
+
+```text
+SHA-256 serve quando devo controllare l'integrità di un file, per esempio dopo un download.
+AES serve quando devo cifrare contenuti o file grandi in modo efficiente.
+RSA è utile quando voglio proteggere un messaggio per qualcuno senza condividere prima una password.
+RSA da sola non è pratica per file grandi, quindi nei sistemi reali si usa spesso una cifratura ibrida.
+La chiave privata non va mai condivisa: se esce dal controllo del proprietario, la sicurezza del sistema crolla.
+```
 
 </details>

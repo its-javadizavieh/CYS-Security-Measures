@@ -215,9 +215,9 @@ Compilate questa tabella con almeno 3 righe reali del vostro sistema:
 
 | Porta/Servizio | Esposto solo in locale o in rete? | Mi serve? | Azione |
 | -------------- | --------------------------------- | --------- | ------ |
-| **_**          | **_**                             | **_**     | **_**  |
-| **_**          | **_**                             | **_**     | **_**  |
-| **_**          | **_**                             | **_**     | **_**  |
+| **\_**         | **\_**                            | **\_**    | **\_** |
+| **\_**         | **\_**                            | **\_**    | **\_** |
+| **\_**         | **\_**                            | **\_**    | **\_** |
 
 > Non disattivate servizi a caso: prima identificate il processo e discutete col docente se ha senso lasciarlo attivo.
 
@@ -251,9 +251,9 @@ Annotate i risultati:
 
 | Controllo avanzato | Stato osservato | Azione consigliata |
 | ------------------ | --------------- | ------------------ |
-| **_**              | **_**           | **_**              |
-| **_**              | **_**           | **_**              |
-| **_**              | **_**           | **_**              |
+| **\_**             | **\_**          | **\_**             |
+| **\_**             | **\_**          | **\_**             |
+| **\_**             | **\_**          | **\_**             |
 
 ---
 
@@ -261,11 +261,11 @@ Annotate i risultati:
 
 Compilate questa tabella di priorità. Per ogni scenario scegliete le **3 misure più urgenti** tra quelle viste nel lab.
 
-| Scenario | Priorità 1 | Priorità 2 | Priorità 3 | Motivazione |
-| -------- | ---------- | ---------- | ---------- | ----------- |
-| Laptop personale usato su Wi-Fi pubblici | **_** | **_** | **_** | **_** |
-| PC di laboratorio condiviso da più studenti | **_** | **_** | **_** | **_** |
-| Notebook dirigente con file riservati e trasferte frequenti | **_** | **_** | **_** | **_** |
+| Scenario                                                    | Priorità 1 | Priorità 2 | Priorità 3 | Motivazione |
+| ----------------------------------------------------------- | ---------- | ---------- | ---------- | ----------- |
+| Laptop personale usato su Wi-Fi pubblici                    | **\_**     | **\_**     | **\_**     | **\_**      |
+| PC di laboratorio condiviso da più studenti                 | **\_**     | **\_**     | **\_**     | **\_**      |
+| Notebook dirigente con file riservati e trasferte frequenti | **\_**     | **\_**     | **\_**     | **\_**      |
 
 Consegna finale del lab:
 
@@ -445,11 +445,11 @@ Regole rapide:
 
 Esempi di ragionamento:
 
-| Caso osservato | Interpretazione | Azione |
-| -------------- | --------------- | ------ |
-| DNS locale su `127.0.0.53:53` (Ubuntu) | Servizio locale di risoluzione nomi, non esposto all'esterno | Tenere |
-| SSH su `0.0.0.0:22` | Accesso remoto disponibile da rete | Tenere solo se davvero necessario e protetto |
-| RDP `3389`, SMB `445` o altri servizi remoti non previsti | Aumentano la superficie di attacco | Verificare col docente e chiudere se inutili |
+| Caso osservato                                            | Interpretazione                                              | Azione                                       |
+| --------------------------------------------------------- | ------------------------------------------------------------ | -------------------------------------------- |
+| DNS locale su `127.0.0.53:53` (Ubuntu)                    | Servizio locale di risoluzione nomi, non esposto all'esterno | Tenere                                       |
+| SSH su `0.0.0.0:22`                                       | Accesso remoto disponibile da rete                           | Tenere solo se davvero necessario e protetto |
+| RDP `3389`, SMB `445` o altri servizi remoti non previsti | Aumentano la superficie di attacco                           | Verificare col docente e chiudere se inutili |
 
 </details>
 
@@ -479,11 +479,11 @@ Se un controllo non è attivo, la colonna "Azione consigliata" deve indicare il 
 <details>
 <summary>Soluzione Step 9: priorità consigliate per i tre scenari</summary>
 
-| Scenario | Priorità 1 | Priorità 2 | Priorità 3 | Motivazione |
-| -------- | ---------- | ---------- | ---------- | ----------- |
-| Laptop personale usato su Wi-Fi pubblici | Firewall attivo | Aggiornamenti automatici | Account standard | Riduce esposizione di rete, corregge vulnerabilità note e limita i danni di un errore utente |
-| PC di laboratorio condiviso da più studenti | Account non-admin | Firewall attivo | Verifica servizi/porte in ascolto | Un PC condiviso ha più rischio di uso improprio e più superficie di attacco locale |
-| Notebook dirigente con file riservati e trasferte frequenti | Cifratura disco | Account standard | Aggiornamenti + protezioni integrate attive | In caso di furto o smarrimento, la cifratura è la misura più critica per proteggere i dati |
+| Scenario                                                    | Priorità 1        | Priorità 2               | Priorità 3                                  | Motivazione                                                                                  |
+| ----------------------------------------------------------- | ----------------- | ------------------------ | ------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| Laptop personale usato su Wi-Fi pubblici                    | Firewall attivo   | Aggiornamenti automatici | Account standard                            | Riduce esposizione di rete, corregge vulnerabilità note e limita i danni di un errore utente |
+| PC di laboratorio condiviso da più studenti                 | Account non-admin | Firewall attivo          | Verifica servizi/porte in ascolto           | Un PC condiviso ha più rischio di uso improprio e più superficie di attacco locale           |
+| Notebook dirigente con file riservati e trasferte frequenti | Cifratura disco   | Account standard         | Aggiornamenti + protezioni integrate attive | In caso di furto o smarrimento, la cifratura è la misura più critica per proteggere i dati   |
 
 > Le priorità possono cambiare leggermente in base al contesto, ma devono sempre essere motivate in modo coerente con il rischio.
 

@@ -1,12 +1,12 @@
-# Lab 07 — Classificazione Dati e Permessi di Accesso
+# Lab 07 - Classificazione Dati e Permessi di Accesso
 
 ## Obiettivo
 
-Creare una matrice di classificazione dei dati e configurare i permessi di file/cartelle su **Windows**, **Ubuntu/Linux** e **macOS**.
+Creare una matrice di classificazione dei dati, configurare i permessi di file/cartelle su **Windows**, **Ubuntu/Linux** e **macOS** e decidere come condividere o bloccare i dati nei casi pratici.
 
 ## Durata
 
-60 minuti
+105-120 minuti
 
 ## Prerequisiti
 
@@ -21,34 +21,34 @@ L'azienda "SecureTech SRL" deve classificare i propri dati e configurare i perme
 
 ## Step
 
-### Parte A — Classificazione dei Dati (15 min)
+### Parte A - Classificazione dei Dati (15 min)
 
-**Step 1 — Comprendere i livelli**
+**Step 1 - Comprendere i livelli**
 
-| Livello | Etichetta | Chi può accedere | Esempio |
-|---------|-----------|-----------------|---------|
-| 1 | **Pubblico** | Tutti | Brochure, sito web |
-| 2 | **Interno** | Solo dipendenti | Procedure, organigramma |
-| 3 | **Riservato** | Solo il team specifico | Contratti clienti, piani commerciali |
-| 4 | **Strett. riservato** | Solo persone autorizzate per nome | Password, dati sanitari, buste paga |
+| Livello | Etichetta             | Chi può accedere                  | Esempio                              |
+| ------- | --------------------- | --------------------------------- | ------------------------------------ |
+| 1       | **Pubblico**          | Tutti                             | Brochure, sito web                   |
+| 2       | **Interno**           | Solo dipendenti                   | Procedure, organigramma              |
+| 3       | **Riservato**         | Solo il team specifico            | Contratti clienti, piani commerciali |
+| 4       | **Strett. riservato** | Solo persone autorizzate per nome | Password, dati sanitari, buste paga  |
 
-**Step 2 — Esercizio: classificare questi documenti**
+**Step 2 - Esercizio: classificare questi documenti**
 
 Compilate la tabella assegnando il livello (1-4):
 
-| Documento | Livello | Perché |
-|-----------|---------|--------|
-| Listino prezzi clienti | _____ | _____ |
-| Buste paga dipendenti | _____ | _____ |
-| Comunicato stampa | _____ | _____ |
-| File con password dei server | _____ | _____ |
-| Manuale utente del software | _____ | _____ |
+| Documento                    | Livello | Perché |
+| ---------------------------- | ------- | ------ |
+| Listino prezzi clienti       | **\_**  | **\_** |
+| Buste paga dipendenti        | **\_**  | **\_** |
+| Comunicato stampa            | **\_**  | **\_** |
+| File con password dei server | **\_**  | **\_** |
+| Manuale utente del software  | **\_**  | **\_** |
 
 > Discutete le risposte con il compagno di banco!
 
 ---
 
-### Parte B — Creare cartelle e file di test (10 min)
+### Parte B - Creare cartelle e file di test (10 min)
 
 **Windows (PowerShell come Amministratore)**
 
@@ -82,17 +82,17 @@ echo "Contratto riservato" > ~/SecureTech/riservato/contratto.txt
 
 ---
 
-### Parte C — Configurare i permessi (20 min)
+### Parte C - Configurare i permessi (20 min)
 
-#### Windows — Permessi NTFS
+#### Windows - Permessi NTFS
 
-**Step 3 — Modificare i permessi dalla GUI**
+**Step 3 - Modificare i permessi dalla GUI**
 
 1. Tasto destro sulla cartella `C:\SecureTech\Riservato` → **Proprietà** → **Sicurezza** → **Modifica**
 2. Selezionare il gruppo **"Users"** → cliccare **"Rimuovi"**
 3. Solo il gruppo "Administrators" rimane → **Applica** → **OK**
 
-**Step 4 — Verificare da PowerShell**
+**Step 4 - Verificare da PowerShell**
 
 ```powershell
 Get-Acl "C:\SecureTech\Riservato" | Format-List
@@ -105,16 +105,16 @@ Get-Acl "C:\SecureTech\Riservato" | Format-List
 
 ---
 
-#### Ubuntu/Linux — Permessi POSIX (chmod)
+#### Ubuntu/Linux - Permessi POSIX (chmod)
 
-**Step 3 — Vedere i permessi attuali**
+**Step 3 - Vedere i permessi attuali**
 
 ```bash
 ls -la ~/SecureTech/riservato/
 # Mostra qualcosa come: -rw-rw-r-- (leggibile da tutti)
 ```
 
-**Step 4 — Restringere i permessi**
+**Step 4 - Restringere i permessi**
 
 ```bash
 chmod 700 ~/SecureTech/riservato/
@@ -122,7 +122,7 @@ ls -la ~/SecureTech/ | grep riservato
 # Ora mostra: drwx------ (solo il proprietario può accedere)
 ```
 
-**Step 5 — Testare l'accesso con un altro utente**
+**Step 5 - Testare l'accesso con un altro utente**
 
 ```bash
 sudo adduser --disabled-password --gecos "" utente_test
@@ -132,15 +132,15 @@ sudo -u utente_test cat ~/SecureTech/riservato/contratto.txt
 
 ---
 
-#### macOS — Permessi POSIX + ACL
+#### macOS - Permessi POSIX + ACL
 
-**Step 3 — Vedere i permessi attuali**
+**Step 3 - Vedere i permessi attuali**
 
 ```bash
 ls -la ~/SecureTech/riservato/
 ```
 
-**Step 4 — Restringere i permessi**
+**Step 4 - Restringere i permessi**
 
 ```bash
 chmod 700 ~/SecureTech/riservato/
@@ -148,7 +148,7 @@ ls -la ~/SecureTech/ | grep riservato
 # Ora mostra: drwx------ (solo il proprietario)
 ```
 
-**Step 5 — Testare l'accesso (metodo alternativo, senza creare utente)**
+**Step 5 - Testare l'accesso (metodo alternativo, senza creare utente)**
 
 ```bash
 # macOS: verificare le ACL
@@ -168,7 +168,7 @@ Oppure dalla GUI:
 
 ---
 
-### Parte D — Sfida: capire i numeri dei permessi (15 min)
+### Parte D - Sfida: capire i numeri dei permessi (15 min)
 
 ```
 chmod 755 = rwxr-xr-x  (proprietario: tutto, altri: leggono ed eseguono)
@@ -179,11 +179,58 @@ chmod 600 = rw-------   (proprietario: legge/scrive, altri: niente)
 
 **Esercizio:** quale permesso usereste per questi file? (su Linux/macOS)
 
-| File | Permesso consigliato | Perché |
-|------|---------------------|--------|
-| Chiave SSH privata (`id_rsa`) | _____ | _____ |
-| Script eseguibile condiviso | _____ | _____ |
-| File di log leggibile da tutti | _____ | _____ |
+| File                           | Permesso consigliato | Perché |
+| ------------------------------ | -------------------- | ------ |
+| Chiave SSH privata (`id_rsa`)  | **\_**               | **\_** |
+| Script eseguibile condiviso    | **\_**               | **\_** |
+| File di log leggibile da tutti | **\_**               | **\_** |
+
+---
+
+### Parte E - Ruoli, condivisione e risposta (20 min)
+
+**Step 6 - Matrice accessi per ruolo**
+
+Completate questa tabella assegnando il livello di accesso minimo corretto:
+
+| Ruolo | Pubblico | Interno | Riservato | Strettamente riservato |
+| ----- | -------- | ------- | --------- | ---------------------- |
+| Marketing | **_** | **_** | **_** | **_** |
+| HR | **_** | **_** | **_** | **_** |
+| IT admin | **_** | **_** | **_** | **_** |
+| Stagista | **_** | **_** | **_** | **_** |
+
+Usate solo etichette come: `nessun accesso`, `lettura`, `lettura/scrittura`.
+
+---
+
+**Step 7 - Scenario cloud sharing / DLP**
+
+Per ogni caso decidete l'azione corretta:
+
+| Scenario | Scelta corretta | Perché |
+| -------- | --------------- | ------ |
+| Cartella con dati clienti condivisa con "Chiunque con il link" | **_** | **_** |
+| Brochure marketing da inviare a un fornitore | **_** | **_** |
+| File stipendi da mandare al commercialista | **_** | **_** |
+
+Ragionate su classificazione, destinatario e canale di condivisione.
+
+---
+
+**Step 8 - Mini-report di incidente**
+
+Scrivete 5-6 righe su uno di questi incidenti:
+
+- un file riservato è stato condiviso alla persona sbagliata
+- una cartella cloud è stata lasciata aperta a tutti con il link
+
+Il report deve includere:
+
+- cosa è successo
+- quale dato/livello è coinvolto
+- prima azione tecnica
+- chi va avvisato
 
 ---
 
@@ -192,6 +239,9 @@ chmod 600 = rw-------   (proprietario: legge/scrive, altri: niente)
 - Matrice di classificazione compilata
 - Cartelle con permessi differenziati sul proprio OS
 - Accesso negato verificato per gli utenti non autorizzati
+- Matrice accessi per ruolo completata
+- Scenari cloud sharing / DLP completati
+- Mini-report di incidente scritto
 
 ## Checkpoint
 
@@ -200,16 +250,21 @@ chmod 600 = rw-------   (proprietario: legge/scrive, altri: niente)
 - [ ] Permessi restrittivi sulla cartella Riservato
 - [ ] Accesso negato verificato (con altro utente o ACL)
 - [ ] Esercizio numeri permessi completato
+- [ ] Matrice accessi per ruolo completata
+- [ ] Scelte corrette nei casi cloud sharing / DLP
+- [ ] Mini-report di incidente completato
 
 ## Troubleshooting rapido
 
-| Problema | Soluzione |
-|----------|----------|
-| Non riesco a modificare i permessi Windows | Verificare di essere admin; tasto destro → "Esegui come amministratore" |
-| `chmod: operation not permitted` (Linux) | Usare `sudo chmod` |
-| `adduser: command not found` (Linux) | `sudo apt install adduser` |
-| macOS: ACL non si applica | Sbloccare il lucchetto in "Ottieni informazioni" o usare `sudo` nel terminale |
-| macOS: non posso creare utente da terminale | Usare Impostazioni di Sistema → Utenti e Gruppi → "+" |
+| Problema                                    | Soluzione                                                                     |
+| ------------------------------------------- | ----------------------------------------------------------------------------- |
+| Non riesco a modificare i permessi Windows  | Verificare di essere admin; tasto destro → "Esegui come amministratore"       |
+| `chmod: operation not permitted` (Linux)    | Usare `sudo chmod`                                                            |
+| `adduser: command not found` (Linux)        | `sudo apt install adduser`                                                    |
+| macOS: ACL non si applica                   | Sbloccare il lucchetto in "Ottieni informazioni" o usare `sudo` nel terminale |
+| macOS: non posso creare utente da terminale | Usare Impostazioni di Sistema → Utenti e Gruppi → "+"                         |
+| Non so chi deve accedere                    | Applicare il minimo privilegio e dare solo l'accesso necessario               |
+| Link cloud troppo aperto                    | Ridurre la condivisione a persone specifiche e revocare il link pubblico      |
 
 ## Cleanup obbligatorio
 
@@ -246,13 +301,13 @@ rm -rf ~/SecureTech
 <details>
 <summary>Soluzione Step 2: classificazione documenti</summary>
 
-| Documento | Livello | Perché |
-|-----------|---------|--------|
-| Listino prezzi clienti | **3 — Riservato** | Contiene informazioni commerciali che i concorrenti potrebbero sfruttare |
-| Buste paga dipendenti | **4 — Strett. riservato** | Dati personali sensibili protetti dal GDPR |
-| Comunicato stampa | **1 — Pubblico** | Creato appositamente per essere diffuso al pubblico |
-| File con password dei server | **4 — Strett. riservato** | Accesso solo per gli admin autorizzati; compromissione = accesso totale ai sistemi |
-| Manuale utente del software | **2 — Interno** | Utile per i dipendenti, ma non sensibile; non va diffuso per evitare di rivelare dettagli tecnici |
+| Documento                    | Livello                   | Perché                                                                                            |
+| ---------------------------- | ------------------------- | ------------------------------------------------------------------------------------------------- |
+| Listino prezzi clienti       | **3 - Riservato**         | Contiene informazioni commerciali che i concorrenti potrebbero sfruttare                          |
+| Buste paga dipendenti        | **4 - Strett. riservato** | Dati personali sensibili protetti dal GDPR                                                        |
+| Comunicato stampa            | **1 - Pubblico**          | Creato appositamente per essere diffuso al pubblico                                               |
+| File con password dei server | **4 - Strett. riservato** | Accesso solo per gli admin autorizzati; compromissione = accesso totale ai sistemi                |
+| Manuale utente del software  | **2 - Interno**           | Utile per i dipendenti, ma non sensibile; non va diffuso per evitare di rivelare dettagli tecnici |
 
 > Nota: la classificazione può variare in base al contesto aziendale. L'importante è che ogni documento abbia un livello assegnato e che le regole di accesso siano coerenti.
 
@@ -315,11 +370,11 @@ ls -le ~/SecureTech/riservato/
 <details>
 <summary>Soluzione Parte D: esercizio numeri permessi</summary>
 
-| File | Permesso | Perché |
-|------|----------|--------|
-| Chiave SSH privata (`id_rsa`) | **600** (`rw-------`) | La chiave privata deve essere leggibile SOLO dal proprietario. SSH rifiuta chiavi con permessi troppo aperti! |
-| Script eseguibile condiviso | **755** (`rwxr-xr-x`) | Il proprietario può tutto; gli altri possono leggere e eseguire lo script, ma non modificarlo |
-| File di log leggibile da tutti | **644** (`rw-r--r--`) | Il proprietario (sysadmin) può scrivere; tutti gli altri possono solo leggere per consultazione |
+| File                           | Permesso              | Perché                                                                                                        |
+| ------------------------------ | --------------------- | ------------------------------------------------------------------------------------------------------------- |
+| Chiave SSH privata (`id_rsa`)  | **600** (`rw-------`) | La chiave privata deve essere leggibile SOLO dal proprietario. SSH rifiuta chiavi con permessi troppo aperti! |
+| Script eseguibile condiviso    | **755** (`rwxr-xr-x`) | Il proprietario può tutto; gli altri possono leggere e eseguire lo script, ma non modificarlo                 |
+| File di log leggibile da tutti | **644** (`rw-r--r--`) | Il proprietario (sysadmin) può scrivere; tutti gli altri possono solo leggere per consultazione               |
 
 **Trucco per ricordare:**
 
@@ -328,5 +383,43 @@ ls -le ~/SecureTech/riservato/
 - **5** = r-x (lettura + esecuzione) = 4+1
 - **4** = r-- (solo lettura) = 4
 - **0** = --- (nessun accesso) = 0
+
+</details>
+
+<details>
+<summary>Soluzione Step 6: esempio matrice accessi per ruolo</summary>
+
+| Ruolo | Pubblico | Interno | Riservato | Strettamente riservato |
+| ----- | -------- | ------- | --------- | ---------------------- |
+| Marketing | lettura/scrittura | lettura | nessun accesso | nessun accesso |
+| HR | lettura | lettura | lettura | lettura/scrittura |
+| IT admin | lettura | lettura/scrittura | lettura/scrittura | accesso solo se motivato e autorizzato |
+| Stagista | lettura | lettura limitata | nessun accesso | nessun accesso |
+
+L'idea chiave non è "dare tutto a chi lavora in azienda", ma autorizzare solo chi ha un motivo reale.
+
+</details>
+
+<details>
+<summary>Soluzione Step 7: decisioni corrette nei casi di condivisione</summary>
+
+| Scenario | Scelta corretta | Motivo |
+| -------- | --------------- | ------ |
+| Dati clienti con link pubblico | Revocare il link e condividere solo con utenti nominati | Il dato è almeno riservato |
+| Brochure marketing | Condivisione libera o invio normale | Il dato è pubblico |
+| File stipendi al commercialista | Condivisione ristretta o canale cifrato con destinatario corretto | Il dato è strettamente riservato |
+
+</details>
+
+<details>
+<summary>Soluzione Step 8: esempio mini-report di incidente</summary>
+
+```text
+Incidente: cartella cloud con dati clienti condivisa per errore con link pubblico.
+Livello coinvolto: riservato.
+Prima azione tecnica: revocare subito il link pubblico e limitare l'accesso a persone specifiche.
+Seconda azione: verificare chi ha avuto accesso e quali file erano esposti.
+Comunicazione: avvisare il referente IT o il responsabile del trattamento dati.
+```
 
 </details>
