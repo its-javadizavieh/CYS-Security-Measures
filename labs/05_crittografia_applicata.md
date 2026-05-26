@@ -69,6 +69,17 @@ dd if=/dev/zero of=~/disco_test.img bs=1M count=50
 
 **Step 2 - Associarlo, formattare con LUKS e montare**
 
+> **Errore `Device or resource busy`?** Su molte installazioni Ubuntu (soprattutto con Snap), `/dev/loop0`–`/dev/loop18` sono già occupati. Non scegliere un numero a caso: trovate il primo loop libero e usate **sempre lo stesso device** in tutti i comandi del lab.
+>
+> ```bash
+> losetup -a              # elenca i loop già in uso
+> sudo losetup -f           # primo loop libero, es. /dev/loop19
+> sudo losetup /dev/loop19 ~/disco_test.img
+> losetup -a | grep disco_test   # conferma l'associazione
+> ```
+>
+> Se `losetup -f` restituisce `/dev/loop19`, sostituite `/dev/loop10` con `/dev/loop19` nei comandi sotto.
+
 ```bash
 sudo losetup /dev/loop10 ~/disco_test.img
 sudo cryptsetup luksFormat /dev/loop10
@@ -279,7 +290,7 @@ La checklist deve contenere almeno una azione tecnica e una azione di escalation
 | ---------------------------------------- | ------------------------------------------------------------------------------------------------ |
 | BitLocker non disponibile (Windows Home) | BitLocker richiede Pro/Enterprise. Osservare il docente o usare VeraCrypt (alternativa gratuita) |
 | `cryptsetup: command not found` (Linux)  | `sudo apt install cryptsetup`                                                                    |
-| Loop device occupato (Linux)             | `sudo losetup -d /dev/loop10`                                                                    |
+| `losetup: Device or resource busy` (Linux) | `losetup -a` per vedere i loop occupati; `sudo losetup -f` per il primo libero (es. `/dev/loop19`); poi `sudo losetup /dev/loop19 ~/disco_test.img` e usate quel device in tutti i comandi successivi |
 | `gpg: command not found` (macOS)         | `brew install gnupg`                                                                             |
 | `gpg: command not found` (Windows)       | Installare Gpg4win o usare Git Bash                                                              |
 | GPG si blocca alla generazione chiavi    | Muovere il mouse / digitare per generare entropia                                                |
