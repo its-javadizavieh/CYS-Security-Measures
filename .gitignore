@@ -1,4 +1,4 @@
-# Only include labs — exclude everything else
+# Only include labs - exclude everything else
 *
 !.gitignore
 !README.md

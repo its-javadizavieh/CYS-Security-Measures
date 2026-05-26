@@ -17,17 +17,17 @@ Each lab includes:
 
 Hands-on laboratory exercises (Italian) covering:
 
-| Lab | Topic |
-|---|---|
-| [01](labs/01_hardening_endpoint.md) | Hardening dell'endpoint |
-| [02](labs/02_configurazione_igiene_digitale.md) | Configurazione e igiene digitale |
-| [03](labs/03_phishing_password.md) | Phishing e gestione delle password |
-| [04](labs/04_fondamenti_crittografia.md) | Fondamenti di crittografia |
-| [05](labs/05_crittografia_applicata.md) | Crittografia applicata |
-| [06](labs/06_autenticazione_2fa.md) | Autenticazione e 2FA |
-| [07](labs/07_classificazione_policy_dati.md) | Classificazione e policy dei dati |
-| [08](labs/08_strumenti_dlp.md) | Strumenti DLP |
-| [09](labs/09_manutenzione_endpoint.md) | Manutenzione dell'endpoint |
+| Lab                                             | Topic                              |
+| ----------------------------------------------- | ---------------------------------- |
+| [01](labs/01_hardening_endpoint.md)             | Hardening dell'endpoint            |
+| [02](labs/02_configurazione_igiene_digitale.md) | Configurazione e igiene digitale   |
+| [03](labs/03_phishing_password.md)              | Phishing e gestione delle password |
+| [04](labs/04_fondamenti_crittografia.md)        | Fondamenti di crittografia         |
+| [05](labs/05_crittografia_applicata.md)         | Crittografia applicata             |
+| [06](labs/06_autenticazione_2fa.md)             | Autenticazione e 2FA               |
+| [07](labs/07_classificazione_policy_dati.md)    | Classificazione e policy dei dati  |
+| [08](labs/08_strumenti_dlp.md)                  | Strumenti DLP                      |
+| [09](labs/09_manutenzione_endpoint.md)          | Manutenzione dell'endpoint         |
 
 ## 👨‍💻 Author
 
@@ -51,4 +51,4 @@ Educational materials for ITS ICT Piemonte.
 
 ---
 
-*Last Updated: February 2026*
+_Last Updated: February 2026_
