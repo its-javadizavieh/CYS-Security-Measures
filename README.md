@@ -9,7 +9,7 @@ This repository contains the hands-on lab exercises for the course. Labs guide s
 Each lab includes:
 
 - goal + scenario
-- step-by-step instructions (Windows / Linux / macOS 🍎)
+- step-by-step instructions (Windows / Linux / macOS)
 - expected output + verification checklist
 - collapsible solutions
 
